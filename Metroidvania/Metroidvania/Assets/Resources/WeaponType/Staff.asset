@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd98365b7e815547981f6d8758c3ebb, type: 3}
+  m_Name: Staff
+  m_EditorClassIdentifier: 
+  neutral: {fileID: 11400000, guid: 88db0279f7c165a4296035223837a513, type: 2}
+  forward: {fileID: 11400000, guid: 9c52787382605a44eb7439f612b7e841, type: 2}
+  downward: {fileID: 11400000, guid: dc2c05472d5d97644a02cdcf240232fa, type: 2}
+  upward: {fileID: 11400000, guid: 1d36db4031a37be44b50f5496add77ac, type: 2}
+  neutralA: {fileID: 11400000, guid: 1e5671327ad432b47b54615625c9f6a5, type: 2}
+  downwardA: {fileID: 11400000, guid: 0d622d3ec9fce194094a6fea5a5e52a6, type: 2}
+  upwardA: {fileID: 11400000, guid: 6c2fe69a7b32a344086e7ab57904c406, type: 2}
+  speed: 0.75
+  canCharge: 1
+  shortCharge: {fileID: 11400000, guid: a734df3d949814d48b0616eb8a23d137, type: 2}
+  longCharge: {fileID: 11400000, guid: ea3ec4df817119f45824a477870a8f2f, type: 2}

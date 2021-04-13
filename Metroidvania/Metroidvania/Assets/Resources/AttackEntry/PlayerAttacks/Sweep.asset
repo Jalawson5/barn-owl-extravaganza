@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b879b786750be6d47a436183823c4de4, type: 3}
+  m_Name: Sweep
+  m_EditorClassIdentifier: 
+  baseAttack: 0.9
+  duration: 0.5
+  isElemental: 0
+  isMagical: 0
+  hasProjectile: 0
+  hasStatus: 0
+  status: 0
+  statusChance: 0
+  hitbox: {fileID: 5066871249641010774, guid: 922612e3b5762f24e81630e9212730f7, type: 3}
+  projectile: {fileID: 0}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27b5250f6c2a454da1baa462035e80f, type: 3}
+  m_Name: InefficientSlash
+  m_EditorClassIdentifier: 
+  id: 1
+  name: InefficientSlash
+  type: 0
+  cost: 30
+  attack: {fileID: 11400000, guid: 2a3aaba73f844fc469f637f09256ff03, type: 2}
+  target: 1

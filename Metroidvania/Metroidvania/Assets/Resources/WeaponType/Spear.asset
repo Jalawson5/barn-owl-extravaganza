@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd98365b7e815547981f6d8758c3ebb, type: 3}
+  m_Name: Spear
+  m_EditorClassIdentifier: 
+  neutral: {fileID: 11400000, guid: 078c49b1cbb17784d928f1824776977b, type: 2}
+  forward: {fileID: 11400000, guid: 075e178841c52a648886120c4c502462, type: 2}
+  downward: {fileID: 11400000, guid: 310517b29285fbd41931ab11b4232fc5, type: 2}
+  upward: {fileID: 0}
+  neutralA: {fileID: 11400000, guid: 078c49b1cbb17784d928f1824776977b, type: 2}
+  downwardA: {fileID: 11400000, guid: 68d61fd0a58fc1c48a3d7dee2f9428ff, type: 2}
+  upwardA: {fileID: 0}
+  speed: 0.75
+  canCharge: 0
+  shortCharge: {fileID: 0}
+  longCharge: {fileID: 0}
