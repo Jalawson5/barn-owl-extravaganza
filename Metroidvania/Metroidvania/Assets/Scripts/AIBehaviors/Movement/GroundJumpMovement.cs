@@ -111,7 +111,5 @@ public class GroundJumpMovement : MonoBehaviour
                 rb.AddForce(new Vector2(horizontalForce * direction, jumpForce));
             }
         }
-        
-        Debug.Log("Fuck You: " + moveTimer);
     }
 }
