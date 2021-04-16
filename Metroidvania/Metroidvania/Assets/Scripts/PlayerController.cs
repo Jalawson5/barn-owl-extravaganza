@@ -157,9 +157,9 @@ public class PlayerController : MonoBehaviour
         if(moving && !attacking)
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(0.51f * direction, 0, 0), (direction == -1)?Vector2.left:Vector2.right, 0.01f, terrainLayer);
-            //RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.51f * direction, -0.4f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.01f, terrainLayer);
+            RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.51f * direction, -0.5f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.01f, terrainLayer);
             
-            if(hit.collider == null)
+            if(hit.collider == null && hitFeet.collider == null)
             {
                 //transform.position += new Vector3(-0.01f, 0, 0);
                 if(dashing)
