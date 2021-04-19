@@ -137,7 +137,6 @@ public class GroundChaseMovement : MonoBehaviour
         
         if(aggroed && canJump && grounded && parent.GetDistance() <= jumpRange && targetTransform.position.y > transform.position.y && jumpTimer >= jumpTimerMax)
         {
-            Debug.Log("Jump! Jump!");
             jumpTimer = 0f;
             rb.AddForce(new Vector2(0f, jumpForce));
         }
