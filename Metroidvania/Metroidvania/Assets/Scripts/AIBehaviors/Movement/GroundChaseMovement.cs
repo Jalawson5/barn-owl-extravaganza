@@ -90,14 +90,14 @@ public class GroundChaseMovement : MonoBehaviour
         {
             hitEdge = Physics2D.Raycast(transform.position - new Vector3(width, height, 0), Vector2.down, 0.1f, terrainLayer);
                 
-            hitWall = Physics2D.Raycast(transform.position - new Vector3(width, 0, 0), Vector2.left, 0.1f, terrainLayer);
+            hitWall = Physics2D.Raycast(transform.position - new Vector3(width, height, 0), Vector2.left, 0.1f, terrainLayer);
         }
             
         else
         {
             hitEdge = Physics2D.Raycast(transform.position + new Vector3(width, height * (-1), 0), Vector2.down, 0.1f, terrainLayer);
                 
-            hitWall = Physics2D.Raycast(transform.position + new Vector3(width, 0, 0), Vector2.right, 0.1f, terrainLayer);
+            hitWall = Physics2D.Raycast(transform.position + new Vector3(width, height * (-1), 0), Vector2.right, 0.1f, terrainLayer);
         }
         
         if((!ignoreCliffs && hitEdge.collider == null) || hitWall.collider != null)

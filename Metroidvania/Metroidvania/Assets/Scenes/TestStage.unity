@@ -3842,7 +3842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayer: {fileID: 1581376194}
   moveSpeed: 3
-  aggroRange: 0
+  aggroRange: 4
   aggressive: 0
   ignoreCliffs: 1
   canJump: 1
