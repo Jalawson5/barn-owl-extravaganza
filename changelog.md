@@ -4,10 +4,12 @@
 ### Changes
 * Tweaked terrain colliders, mostly fixing jittering while falling against a wall, hopefully without a major hit to performance.
 * Tweaked the player's jumping physics to allow the player to perform shorter jumps. Jumping physics are still likely to change.
+* Updated the GroundChaseMovement behavior to better check for walls, fixing the issue of getting caught on corners.
 
 ### Known Issues
 * Player (and likely jumping enemies) clip into the ground slightly after falling a long enough distance. This does not seem to have any impact on gameplay, but it definitely looks out of place.
-* Enemies do not use the player's updated movement behavior and can still get stuck on the corners of terrain.
+* ~~Enemies do not use the player's updated movement behavior and can still get stuck on the corners of terrain.~~
+* Enemies with the Air Chase behavior can still get stuck on the corners of terrain. Moving the player to an angle where the enemy moves away from the wall will free the enemy. Other movement behaviors do not seem to have this issue.
 
 ## April 16, 2021
 ### Changes
