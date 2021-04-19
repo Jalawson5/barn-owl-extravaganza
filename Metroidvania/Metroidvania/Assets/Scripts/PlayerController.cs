@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jumpSpeed = 10f;
+        jumpSpeed = 16.5f;
         jumpTime = 0f;
-        jumpTimeMax = 0.15f;
+        jumpTimeMax = 0.3f;
         grounded = false;
         
         moveSpeed = 5f;
@@ -87,9 +87,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Is the player on the ground?//
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, -0.6f, 0), Vector2.down, 0.01f, terrainLayer);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
         
-        if(hit.collider == null)
+        
+        if(hitLeft.collider == null && hitRight.collider == null)
         {
             grounded = false;
         }
@@ -102,23 +104,29 @@ public class PlayerController : MonoBehaviour
         //Jump Controls//
         if(Input.GetKeyDown("z") && grounded && !attacking)
         {
-            //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             jumping = true;
         }
         
-        
-        
-        if(jumpTime > jumpTimeMax || Input.GetKeyUp("z"))
+        if(jumping && (jumpTime > jumpTimeMax || Input.GetKeyUp("z")))
         {
             jumping = false;
             jumpTime = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
         }
         
-        else if(jumping && jumpTime < jumpTimeMax)
+        else if(jumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             jumpTime += Time.deltaTime;
         }
+        
+        //else if(jumping && jumpTime < jumpTimeMax)
+        //{
+        //    //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        //    if(rb.velocity.y < jumpSpeed)
+        //    rb.AddForce(new Vector2(0, jumpSpeed * Time.deltaTime), ForceMode2D.Impulse);
+        //    jumpTime += Time.deltaTime;
+        //}
         
         //Horizontal Movement Controls//
         if((Input.GetKeyDown("left") || Input.GetKeyDown("right")) && dashTimer <= 0)
@@ -156,12 +164,11 @@ public class PlayerController : MonoBehaviour
         
         if(moving && !attacking)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.51f * direction, 0, 0), (direction == -1)?Vector2.left:Vector2.right, 0.01f, terrainLayer);
-            RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.51f * direction, -0.5f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.01f, terrainLayer);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.50f * direction, 0, 0), (direction == -1)?Vector2.left:Vector2.right, 0.1f, terrainLayer);
+            RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.50f * direction, -0.5f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.1f, terrainLayer);
             
             if(hit.collider == null && hitFeet.collider == null)
             {
-                //transform.position += new Vector3(-0.01f, 0, 0);
                 if(dashing)
                     rb.velocity = new Vector2(dashSpeed * direction, rb.velocity.y);
                     
