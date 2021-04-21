@@ -23,6 +23,10 @@ public class AirChaseMovement : MonoBehaviour
     private Vector3 targetPos;
     private float timeout; //If timeout time is met, may be stuck, stop chasing.//
     private float timeoutTimer;
+    private float height;
+    private float width;
+    
+    private LayerMask terrainLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,11 @@ public class AirChaseMovement : MonoBehaviour
         timeoutTimer = 0f;
         
         parent.SetDirection(-1);
+        
+        terrainLayer = LayerMask.GetMask("Solid");
+        
+        height = gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2;
+        width = gameObject.GetComponent<BoxCollider2D>().bounds.size.x / 2;
     }
 
     // Update is called once per frame
@@ -80,6 +89,16 @@ public class AirChaseMovement : MonoBehaviour
                 chasing = true;
                 
                 targetPos = new Vector3(playerTransform.position.x, playerTransform.position.y, 0);
+                
+                //Check if the enemy will move into a nearby wall, adjust the target position if true//
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, DirectionVector(), 2f, terrainLayer);
+                RaycastHit2D hitBottom = Physics2D.Raycast(new Vector3(transform.position.x + (width * parent.GetDirection()), transform.position.y - height, 0), DirectionVector(), 2f, terrainLayer);
+                RaycastHit2D hitTop = Physics2D.Raycast(new Vector3(transform.position.x + (width * parent.GetDirection()), transform.position.y + height, 0), DirectionVector(), 2f, terrainLayer);
+                
+                if((hit.collider != null || hitBottom.collider != null || hitTop.collider != null) && !throughWalls)
+                {
+                    AdjustTarget();
+                }
             }
         }
         
@@ -88,6 +107,12 @@ public class AirChaseMovement : MonoBehaviour
             //transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
             Vector3 direction = Vector3.Normalize(targetPos - transform.position);
             rb.velocity = direction * moveSpeed;
+            
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 2f, terrainLayer);
+            if(hit.collider != null)
+            {
+                //AdjustVelocity();
+            }
             
             timeoutTimer += Time.deltaTime;
             
@@ -111,5 +136,48 @@ public class AirChaseMovement : MonoBehaviour
         {
             parent.SetDirection(1);
         }
+    }
+    
+    private void AdjustVelocity()
+    {
+        float tempX, tempY;
+        int xDir, yDir;
+        
+        xDir = ((rb.velocity.x < 0)? -1: 1);
+        yDir = ((rb.velocity.y < 0)? -1: 1);
+        
+        tempX = rb.velocity.y * xDir;
+        tempY = rb.velocity.x * yDir;
+        
+        rb.velocity = new Vector3(tempX, tempY, 0);
+    }
+    
+    private void AdjustTarget()
+    {
+        float tempX, tempY;
+        int xDir, yDir;
+        
+        Vector3 tempVect = transform.InverseTransformPoint(targetPos);
+        
+        xDir = ((tempVect.x < 0)? -1: 1);
+        yDir = ((tempVect.y < 0)? -1: 1);
+        
+        tempX = tempVect.y;
+        tempY = tempVect.x;
+        
+        //If X is the wrong direction, flip the sign//
+        if((xDir == -1 && tempX > 0) || (xDir == 1 && tempX < 0))
+            tempX *= -1;
+        
+        //If Y is the wrong direction, flip the sign//
+        if((yDir == -1 && tempY > 0) || (yDir == 1 && tempY < 0))
+            tempY *= -1;
+            
+        targetPos = new Vector3(transform.position.x + tempX, transform.position.y + tempY, 0);
+    }
+    
+    private Vector3 DirectionVector()
+    {
+        return Vector3.Normalize(targetPos - transform.position);
     }
 }
