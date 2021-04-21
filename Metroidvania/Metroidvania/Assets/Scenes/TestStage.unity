@@ -3840,12 +3840,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc0517a7437f454586bb70f4aef3b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  moveDelay: 2
+  moveSpeed: 3
+  moveDelay: 0
   aggroRange: 3
   throughWalls: 0
   aggressive: 1
-  perfectFollow: 0
+  perfectFollow: 1
   parent: {fileID: 1286913894}
   playerTarget: {fileID: 1581376194}
 --- !u!1001 &1292013385

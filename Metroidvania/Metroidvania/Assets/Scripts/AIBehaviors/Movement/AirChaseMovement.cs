@@ -104,15 +104,8 @@ public class AirChaseMovement : MonoBehaviour
         
         if(chasing) //Even if aggro is broken, finish moving to target//
         {
-            //transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
             Vector3 direction = Vector3.Normalize(targetPos - transform.position);
             rb.velocity = direction * moveSpeed;
-            
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 2f, terrainLayer);
-            if(hit.collider != null)
-            {
-                //AdjustVelocity();
-            }
             
             timeoutTimer += Time.deltaTime;
             
