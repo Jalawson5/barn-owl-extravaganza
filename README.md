@@ -3,6 +3,8 @@ Action-RPG/Platformer game en route
 
 I don't have a name for the game yet, so random repository name it is!
 
+Note: This game has naught to do with barn owls, as much as it should.
+
 This game will be an Action-RPG/Platformer, inspired by games like Castlevania: Aria of Sorrow for the GBA, where the player will traverse a variety of dungeons, fight bosses, get loot, and obtain upgrades allowing them to progress further. I *may* implement multiplayer co-op in the future, but I would like to focus on a solid singleplayer experience first.
 
 Development is temporarily paused while I make some design choices. Though some basic mechanics have been implemented, I am taking some time to decide on different dungeons, enemies, spells, and even where the story will go, so I will have an idea of where to go next in terms of programming.
