@@ -7,4 +7,6 @@ public class UseItem : ScriptableObject
 {
     public int id;
     public new string name;
+    
+    public ItemEffect[] effects;
 }

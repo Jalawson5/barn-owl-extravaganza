@@ -6,6 +6,5 @@ using UnityEngine;
 public class ActionSkill : Skill
 {
     public int cost;
-    public AttackEntry attack;
     public SkillData.TargetType target;
 }

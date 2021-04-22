@@ -360,7 +360,7 @@ public class PlayerController : MonoBehaviour
                 
                 else if(skill1.target == SkillData.TargetType.Enemy)
                 {
-                    attack = skill1.attack;
+                    attack = ((AttackAction)skill1).attack;
                     temp = Instantiate(attack.hitbox, transform, false);
                     temp.GetComponent<AttackHitboxBehavior>().Attack(attack.duration, direction);
                     temp.GetComponent<AttackHitboxBehavior>().InitStats(attack.baseAttack, attack.isElemental, attack.isMagical);

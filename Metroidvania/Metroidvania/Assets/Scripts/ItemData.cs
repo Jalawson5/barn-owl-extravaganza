@@ -9,6 +9,8 @@ using UnityEngine;
 /////////////////////////////////////////////////////////////////
 public class ItemData
 {
+    public enum EffectType {HealHP, HealMP, RegenHP, RegenMP, HealStatus, BuffStat}
+    
     private static Weapon[] weapons;
     private static Armor[] armors;
     private static Accessory[] accessories;
