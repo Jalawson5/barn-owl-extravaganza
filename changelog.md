@@ -1,5 +1,13 @@
 # Changelog
 
+## April 23, 2021
+### Changes
+* Tweaked the player's jumping physics because it was bugging me. The player now jumps for a longer time, but with a smaller force.
+
+### Known Issues
+* Player and jumping enemies still clip into the ground after falling a long distance.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall. This is a result of how the movement type chooses a new target position. Enemies that can move through walls are unaffected.
+
 ## April 22, 2021
 ### Changes
 * Tweaked the organization of skills to prepare for the full implementation of skills in the future.
