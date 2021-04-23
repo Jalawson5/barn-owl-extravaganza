@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New BuffAction", menuName = "BuffAction")]
-public class BuffAction : ActionSkill
+[CreateAssetMenu(fileName = "New BuffItem")]
+public class BuffItem : UseItem
 {
     public int bonusSTR;
     public int bonusEND;
@@ -11,10 +11,11 @@ public class BuffAction : ActionSkill
     public int bonusSPR;
     public int bonusAGI;
     public int bonusLUCK;
+    public int regenHP;
+    public int regenMP;
     
-    public BuffStatus[] buffs;
+    public StatusEffect[] resist;
+    public float resistAmount;
     
     public float duration;
-    
-    //If multiplayer is implemented, will include a new friendly AttackEntry type, hitting only allies with beneficial effects//
 }

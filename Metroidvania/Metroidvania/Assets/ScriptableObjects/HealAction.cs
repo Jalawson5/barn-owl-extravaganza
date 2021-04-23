@@ -7,4 +7,6 @@ public class HealAction : ActionSkill
 {
     public float healHP;    
     public StatusEffect[] healEffects;
+    
+    //If multiplayer is implemented, will include a new friendly AttackEntry type, hitting only allies with beneficial effects//
 }

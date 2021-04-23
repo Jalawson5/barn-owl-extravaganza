@@ -13,4 +13,6 @@ public class DebuffAction : ActionSkill
     public int subLUCK;
     
     public StatusEffect[] effects;
+    
+    public AttackEntry attack; //Debuff skills do not deal damage directly, set baseDamage to 0!//
 }
