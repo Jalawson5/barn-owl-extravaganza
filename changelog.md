@@ -1,5 +1,13 @@
 # Changelog
 
+## April 22, 2021
+### Changes
+* Tweaked the organization of skills to prepare for the full implementation of skills in the future.
+
+### Known Issues
+* Player and jumping enemies still clip into the ground after falling a long distance.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall. This is a result of how the movement type chooses a new target position. Enemies that can move through walls are unaffected.
+
 ## April 21, 2021
 ### Changes
 * Enemies with the AirChaseMovement move type are now able to choose a new target position to dash towards if they would collide into a wall. This allows AirChaseMovement enemies to attempt to fly above walls to get a better angle to the player.
