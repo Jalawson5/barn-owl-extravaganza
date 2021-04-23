@@ -5,6 +5,10 @@
 * Tweaked the player's jumping physics because it was bugging me. The player now jumps for a longer time, but with a smaller force.
 * Tweaked the organization of items to prepare for the full implementation of items in the future.
 * Adjusted the player's Rigidbody component, fixing the issue of clipping into the ground after jumping.
+* Added a UI element containing a Health bar and MP bar for the player. Each bar will reduce in size according to the player's current HP and MP values. Design not final.
+* The camera now follows the player.
+* Tweaked skills to fix a previously undiscovered casting issue.
+* Officially tested invincibility frames (they work!).
 
 ### Known Issues
 * ~~Player and jumping enemies still clip into the ground after falling a long distance.~~
