@@ -3,6 +3,7 @@
 ## April 23, 2021
 ### Changes
 * Tweaked the player's jumping physics because it was bugging me. The player now jumps for a longer time, but with a smaller force.
+* Tweaked the organization of skills to prepare for the full implementation of items in the future.
 
 ### Known Issues
 * Player and jumping enemies still clip into the ground after falling a long distance.
