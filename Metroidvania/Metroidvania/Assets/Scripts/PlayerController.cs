@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Jump Related Variables//
+    [SerializeField]
     private float jumpSpeed; //How fast to jump//
     private float jumpTime; //How long the player has been jumping//
     private float jumpTimeMax; //How long the player can jump//
@@ -48,9 +49,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jumpSpeed = 16.5f;
+        //jumpSpeed = 16.5f;
         jumpTime = 0f;
-        jumpTimeMax = 0.3f;
+        jumpTimeMax = 0.7f;
         grounded = false;
         
         moveSpeed = 5f;
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
             jumping = true;
         }
         
-        if(jumping && (jumpTime > jumpTimeMax || Input.GetKeyUp("z")))
+        if(jumping && (jumpTime > jumpTimeMax || Input.GetKeyUp("z")) && rb.velocity.y >= 0)
         {
             jumping = false;
             jumpTime = 0f;

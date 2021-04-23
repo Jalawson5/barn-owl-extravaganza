@@ -3825,7 +3825,7 @@ MonoBehaviour:
   - {fileID: 263220353}
   rapidCount: 0
   rapidDelay: 0
-  aggroRange: 3
+  aggroRange: 5
   attackDelay: 1
   attackTimer: 1
 --- !u!114 &1286913896
@@ -3842,7 +3842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   moveDelay: 0
-  aggroRange: 3
+  aggroRange: 0
   throughWalls: 0
   aggressive: 1
   perfectFollow: 1
@@ -4972,6 +4972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ac5cfd772447746bbf095f97512ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSpeed: 12
   currWeapon: {fileID: 11400000, guid: 456cf1830e6dc414fb2a31813f14cc5b, type: 2}
   skill1: {fileID: 11400000, guid: bcae854b3d8fc8d46a6760469dab8416, type: 2}
 --- !u!212 &1581376196
@@ -5039,7 +5040,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.8
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
