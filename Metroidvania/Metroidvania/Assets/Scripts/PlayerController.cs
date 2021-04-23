@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private float shortCharge; //How long the player must charge to achieve a short charge//
     
     //Status Variables//
+    private int maxHP;
+    private int maxMP;
     private int currentHP; //Current health value. Die when current HP reaches 0//
     private int currentMP; //Current MP value//
     private float iframes; //Length of iframes//
@@ -44,7 +46,10 @@ public class PlayerController : MonoBehaviour
     public CharacterData.CharacterEntry stats; //Stats of the current character//
     public Weapon currWeapon; //Current equipped weapon//
     public ActionSkill skill1; //Skill equipped in slot 1//
-    private ActionSkill skill2; //Skill equipped in slot 2//
+    public ActionSkill skill2; //Skill equipped in slot 2//
+    
+    public UIBarBehavior hpBar;
+    public UIBarBehavior mpBar;
     
     // Start is called before the first frame update
     void Start()
@@ -78,8 +83,10 @@ public class PlayerController : MonoBehaviour
         //skill1 = (ActionSkill)(stats.GetSkill1().GetSkill());
         skill2 = (ActionSkill)(stats.GetSkill2().GetSkill());
         
-        currentHP = stats.GetHP(true);
-        currentMP = stats.GetMP(true);
+        maxHP = stats.GetHP(true);
+        maxMP = stats.GetMP(true);
+        currentHP = maxHP;
+        currentMP = maxMP;
         iframes = 1f;
         iframesTimer = 1f;
     }
@@ -353,7 +360,9 @@ public class PlayerController : MonoBehaviour
                 
                 else if(skill1.target == SkillData.TargetType.Enemy)
                 {
-                    attack = ((AttackAction)skill1).attack;
+                    //attack = ((AttackAction)skill1).attack;
+                    AttackAction tempAction = (AttackAction)skill1;
+                    attack = tempAction.attack;
                     temp = Instantiate(attack.hitbox, transform, false);
                     temp.GetComponent<AttackHitboxBehavior>().Attack(attack.duration, direction);
                     temp.GetComponent<AttackHitboxBehavior>().InitStats(attack.baseAttack, attack.isElemental, attack.isMagical);
@@ -375,6 +384,14 @@ public class PlayerController : MonoBehaviour
         {
             iframesTimer += Time.deltaTime;
         }
+        
+        //UI Updates//
+        
+        //Health//
+        hpBar.AdjustBar(currentHP, maxHP);
+        
+        //Magic//
+        mpBar.AdjustBar(currentMP, maxMP);
     }
     
     ////////////////////////////////////////
