@@ -3,7 +3,7 @@
 ## April 23, 2021
 ### Changes
 * Tweaked the player's jumping physics because it was bugging me. The player now jumps for a longer time, but with a smaller force.
-* Tweaked the organization of skills to prepare for the full implementation of items in the future.
+* Tweaked the organization of items to prepare for the full implementation of items in the future.
 * Adjusted the player's Rigidbody component, fixing the issue of clipping into the ground after jumping.
 
 ### Known Issues
