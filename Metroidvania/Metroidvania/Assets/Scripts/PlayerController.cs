@@ -121,14 +121,6 @@ public class PlayerController : MonoBehaviour
             jumpTime += Time.deltaTime;
         }
         
-        //else if(jumping && jumpTime < jumpTimeMax)
-        //{
-        //    //rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        //    if(rb.velocity.y < jumpSpeed)
-        //    rb.AddForce(new Vector2(0, jumpSpeed * Time.deltaTime), ForceMode2D.Impulse);
-        //    jumpTime += Time.deltaTime;
-        //}
-        
         //Horizontal Movement Controls//
         if((Input.GetKeyDown("left") || Input.GetKeyDown("right")) && dashTimer <= 0)
         {
