@@ -1,5 +1,12 @@
 # Changelog
 
+## April 26, 2021
+### Changes
+* Added a previously missing attack. One-hand and two-hand melee weapons now have a downward-air attack.
+
+### Known Issues
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall. This is a result of how the movement type chooses a new target position. Enemies that can move through walls are unaffected.
+
 ## April 23, 2021
 ### Changes
 * Tweaked the player's jumping physics because it was bugging me. The player now jumps for a longer time, but with a smaller force.
@@ -7,7 +14,7 @@
 * Adjusted the player's Rigidbody component, fixing the issue of clipping into the ground after jumping.
 * Added a UI element containing a Health bar and MP bar for the player. Each bar will reduce in size according to the player's current HP and MP values. Design not final.
 * The camera now follows the player.
-* Tweaked skills to fix a previously undiscovered casting issue.
+* Tweaked skills to fix a previously undiscovered type casting issue.
 * Officially tested invincibility frames (they work!).
 
 ### Known Issues
