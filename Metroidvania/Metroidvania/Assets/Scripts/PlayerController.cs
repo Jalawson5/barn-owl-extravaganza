@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public UIBarBehavior hpBar;
     public UIBarBehavior mpBar;
     
+    public MasterController master;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +91,8 @@ public class PlayerController : MonoBehaviour
         currentMP = maxMP;
         iframes = 1f;
         iframesTimer = 1f;
+        
+        master = MasterController.instance;
     }
 
     // Update is called once per frame
@@ -110,13 +114,13 @@ public class PlayerController : MonoBehaviour
         }
         
         //Jump Controls//
-        if(Input.GetKeyDown("z") && grounded && !attacking)
+        if(Input.GetKeyDown(master.controls.GetJumpKey()) && grounded && !attacking)
         {
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             jumping = true;
         }
         
-        if(jumping && (jumpTime > jumpTimeMax || Input.GetKeyUp("z")) && rb.velocity.y >= 0)
+        if(jumping && (jumpTime > jumpTimeMax || Input.GetKeyUp(master.controls.GetJumpKey())) && rb.velocity.y >= 0)
         {
             jumping = false;
             jumpTime = 0f;
@@ -192,7 +196,7 @@ public class PlayerController : MonoBehaviour
         if(attackDuration <= 0)
             attacking = false;
         
-        if((Input.GetKeyDown("x") && weaponTimer >= weaponTimerMax) || (charging && Input.GetKeyUp("x")))
+        if((Input.GetKeyDown(master.controls.GetAttackKey()) && weaponTimer >= weaponTimerMax) || (charging && Input.GetKeyUp(master.controls.GetAttackKey())))
         {
             weaponTimer = 0f;
             AttackEntry attack = null;
@@ -200,7 +204,7 @@ public class PlayerController : MonoBehaviour
             
             
             
-            if(Input.GetKeyUp("x") && charging)
+            if(Input.GetKeyUp(master.controls.GetAttackKey()) && charging)
             {
                 //Long Charge//
                 if(chargeTimer <= 0)
@@ -317,13 +321,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if(Input.GetKey("x") && weaponType.canCharge && !charging && weaponTimer >= weaponTimerMax)
+        if(Input.GetKey(master.controls.GetAttackKey()) && weaponType.canCharge && !charging && weaponTimer >= weaponTimerMax)
         {
             charging = true;
             chargeTimer = chargeTimeMax;
         }
         
-        if(Input.GetKey("x") && charging)
+        if(Input.GetKey(master.controls.GetAttackKey()) && charging)
         {
             Debug.Log("Charging");
             
@@ -342,7 +346,7 @@ public class PlayerController : MonoBehaviour
         //Cannot use Action Skills of any type while charging an attack//
         
         //Skill 1//
-        if(Input.GetKeyDown("a") && !charging && weaponTimer >=weaponTimerMax)
+        if(Input.GetKeyDown(master.controls.GetSkillOneKey()) && !charging && weaponTimer >= weaponTimerMax)
         {            
             Debug.Log("Skill: " + skill1.name);
             Debug.Log("MP: " + currentMP);
