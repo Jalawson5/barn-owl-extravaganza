@@ -3,6 +3,8 @@
 ## April 26, 2021
 ### Changes
 * Added a previously missing attack. One-hand and two-hand melee weapons now have a downward-air attack.
+* Added Controller Settings to clean up code and prepare for custom controls in the future.
+* Fixed a devastating typo that was causing the MasterController script to not run properly. Oops!
 
 ### Known Issues
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall. This is a result of how the movement type chooses a new target position. Enemies that can move through walls are unaffected.
