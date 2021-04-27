@@ -66,6 +66,7 @@ public class CharacterData
         int skillAGI;
         int skillLUCK;
         
+        //Equipped Skills//
         SkillNode skill1;
         SkillNode skill2;
         
@@ -74,10 +75,19 @@ public class CharacterData
         List<SkillNode> passiveSkills;
         List<SkillNode> upgradeSkills;
         
+        //Major Upgrades Unlocked//
+        bool doubleJumpUnlocked;
+        bool wallJumpUnlocked;
+        bool rockBreakerUnlocked;
+        bool slideUnlocked;
+        bool swimUnlocked;
+        bool keyUnlocked;
+        
         //This constructor is to be used to initialize a character from a loaded game//
         //I know it's a bit messy, but there's a lot of data to initialize!//
         public CharacterEntry(PlayerClass playerClass, string name, int level, int exp, int playerHP, int playerMP, int playerSTR, int playerINT, int playerEND, int playerSPR, int playerAGI, int playerLUCK,
-                              int weapon, int armor, int accessory1, int accessory2, int rune1, int rune2, int[] skills, int skill1, int skill2)
+                              int weapon, int armor, int accessory1, int accessory2, int rune1, int rune2, int[] skills, int skill1, int skill2, bool doubleJumpUnlocked, bool wallJumpUnlocked,
+                              bool rockBreakerUnlocked, bool slideUnlocked, bool swimUnlocked, bool keyUnlocked)
         {
             this.playerClass = playerClass;
             this.name = name;
@@ -108,6 +118,13 @@ public class CharacterData
             
             EquipSkill(skill1, 0);
             EquipSkill(skill2, 0);
+            
+            this.doubleJumpUnlocked = doubleJumpUnlocked;
+            this.wallJumpUnlocked = wallJumpUnlocked;
+            this.rockBreakerUnlocked = rockBreakerUnlocked;
+            this.slideUnlocked = slideUnlocked;
+            this.swimUnlocked = swimUnlocked;
+            this.keyUnlocked = keyUnlocked;
         }
         
         //This constructor is used to create a new character//
@@ -141,6 +158,13 @@ public class CharacterData
             
             skill1 = SkillData.GetEmptyNode();
             skill2 = SkillData.GetEmptyNode();
+            
+            this.doubleJumpUnlocked = false;
+            this.wallJumpUnlocked = false;
+            this.rockBreakerUnlocked = false;
+            this.slideUnlocked = false;
+            this.swimUnlocked = false;
+            this.keyUnlocked = false;
         }
         
         //Get Stats//
@@ -330,6 +354,36 @@ public class CharacterData
             return skill2;
         }
         
+        public bool HasDoubleJump()
+        {
+            return doubleJumpUnlocked;
+        }
+        
+        public bool HasWallJump()
+        {
+            return wallJumpUnlocked;
+        }
+        
+        public bool HasRockBreaker()
+        {
+            return rockBreakerUnlocked;
+        }
+        
+        public bool HasSlide()
+        {
+            return slideUnlocked;
+        }
+        
+        public bool HasSwim()
+        {
+            return swimUnlocked;
+        }
+        
+        public bool HasKey()
+        {
+            return keyUnlocked;
+        }
+        
         //bool AddSkill(SkillNode)
         //Adds the specified skill to the character
         public bool AddSkill(SkillNode node)
@@ -420,6 +474,36 @@ public class CharacterData
             }
             
             return true;
+        }
+        
+        public void UnlockDoubleJump()
+        {
+            doubleJumpUnlocked = true;
+        }
+        
+        public void UnlockWallJump()
+        {
+            wallJumpUnlocked = true;
+        }
+        
+        public void UnlockRockBreaker()
+        {
+            rockBreakerUnlocked = true;
+        }
+        
+        public void UnlockSlide()
+        {
+            slideUnlocked = true;
+        }
+        
+        public void UnlockSwim()
+        {
+            swimUnlocked = true;
+        }
+        
+        public void UnlockKey()
+        {
+            keyUnlocked = true;
         }
         
         //////////////////////////////////////////////////////////

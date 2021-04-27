@@ -17,7 +17,7 @@ MonoBehaviour:
   downward: {fileID: 11400000, guid: 0297adaaf4dc9bb44b0f58ba371803f1, type: 2}
   upward: {fileID: 11400000, guid: 1d36db4031a37be44b50f5496add77ac, type: 2}
   neutralA: {fileID: 11400000, guid: 4f09438eec8cb074d9fcf152b202706b, type: 2}
-  downwardA: {fileID: 0}
+  downwardA: {fileID: 11400000, guid: 9ec491e6722626940bc54496a903de93, type: 2}
   upwardA: {fileID: 11400000, guid: 1d36db4031a37be44b50f5496add77ac, type: 2}
   speed: 0.75
   canCharge: 0
