@@ -1,5 +1,13 @@
 # Changelog
 
+## April 27, 2021
+### Changes
+* Actually added the missing attack mentioned in April 26. Turns out the attack was implemented, but the change to the weapons themselves wasn't pushed to GitHub yet.
+* Added progression abilities to character stats to prepare for the full implementation of progression abilities in the future.
+
+### Known Issues
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall. This is a result of how the movement type chooses a new target position. Enemies that can move through walls are unaffected.
+
 ## April 26, 2021
 ### Changes
 * Added a previously missing attack. One-hand and two-hand melee weapons now have a downward-air attack.
