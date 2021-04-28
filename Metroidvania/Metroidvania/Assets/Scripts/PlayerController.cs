@@ -131,8 +131,8 @@ public class PlayerController : MonoBehaviour
         }
     
         //Is the player on the ground?//
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.5f, 0), Vector2.down, 0.05f, terrainLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.5f, 0), Vector2.down, 0.05f, terrainLayer);
         
         
         if(hitLeft.collider == null && hitRight.collider == null)
@@ -212,8 +212,8 @@ public class PlayerController : MonoBehaviour
         
         if(moving && !attacking)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.50f * direction, 0, 0), (direction == -1)?Vector2.left:Vector2.right, 0.1f, terrainLayer);
-            RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.50f * direction, -0.5f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.1f, terrainLayer);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.5f * direction, 0, 0), (direction == -1)?Vector2.left:Vector2.right, 0.05f, terrainLayer);
+            RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.5f * direction, -0.5f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.05f, terrainLayer);
             
             if(hit.collider == null && hitFeet.collider == null)
             {
