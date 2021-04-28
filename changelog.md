@@ -1,5 +1,14 @@
 # Changelog
 
+## April 28, 2021
+### Changes
+* Reworked player physics. The player character now calculates gravity separately from Unity's built-in physics to allow for...
+* Added the ability to double jump. Pressing the jump button in mid-air will allow the player to jump again.
+
+### Known Issues
+* The player's gravity does not function properly when quickly moving left and right at the edge of a platform.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## April 27, 2021
 ### Changes
 * Actually added the missing attack mentioned in April 26. Turns out the attack was implemented, but the change to the weapons themselves wasn't pushed to GitHub yet.
