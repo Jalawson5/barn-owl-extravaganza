@@ -124,6 +124,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity -= new Vector2(0, gravity * Time.deltaTime);
         }
+        
+        else if(!jumping)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
     
         //Is the player on the ground?//
         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
