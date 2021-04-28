@@ -5453,8 +5453,8 @@ MonoBehaviour:
   skill2: {fileID: 0}
   hpBar: {fileID: 718931798}
   mpBar: {fileID: 249839355}
-  master: {fileID: 0}
-  gravity: 10
+  master: {fileID: 1732778339}
+  wallSlide: 2
 --- !u!212 &1581376196
 SpriteRenderer:
   m_ObjectHideFlags: 0

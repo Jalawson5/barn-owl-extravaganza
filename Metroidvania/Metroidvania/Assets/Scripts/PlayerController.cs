@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private int direction; //What direction the player is facing (left = -1, right = 1)//
     private bool dashing; //Is the player currently dashing?//
     private float dashTimer; //How fast the player must double-tap move keys to dash//
+    private bool changeDirection; //Has the player changed direction this frame?//
     
     private Rigidbody2D rb;
     
@@ -61,9 +62,12 @@ public class PlayerController : MonoBehaviour
     private bool hasKey;
     
     private bool jumpAgain;
+    private bool againstWall;
+    
+    private float gravity;
     
     [SerializeField]
-    private float gravity;
+    private float wallSlide;
     
     // Start is called before the first frame update
     void Start()
@@ -79,6 +83,7 @@ public class PlayerController : MonoBehaviour
         direction = 1;
         dashing = false;
         dashTimer = 0f;
+        changeDirection = false;
         
         rb = gameObject.GetComponent<Rigidbody2D>();
         
@@ -105,16 +110,18 @@ public class PlayerController : MonoBehaviour
         iframesTimer = 1f;
         
         hasDoubleJump = true; //stats.HasDoubleJump();
-        hasWallJump = stats.HasWallJump();
+        hasWallJump = true; //stats.HasWallJump();
         hasRockBreaker = stats.HasRockBreaker();
         hasSlide = stats.HasSlide();
         hasSwim = stats.HasSwim();
         hasKey = stats.HasKey();
         
         jumpAgain = false;
+        againstWall = false;
         
         master = MasterController.instance;
         
+        gravity = 10f;
     }
 
     // Update is called once per frame
@@ -122,7 +129,11 @@ public class PlayerController : MonoBehaviour
     {
         if(!grounded)
         {
-            rb.velocity -= new Vector2(0, gravity * Time.deltaTime);
+            if(againstWall && hasWallJump && moving)
+                rb.velocity -= new Vector2(0, wallSlide * Time.deltaTime);
+            
+            else
+                rb.velocity -= new Vector2(0, gravity * Time.deltaTime);
         }
         
         else if(!jumping)
@@ -149,11 +160,17 @@ public class PlayerController : MonoBehaviour
         }
         
         //Jump Controls//
-        if(Input.GetKeyDown(master.controls.GetJumpKey()) && (grounded || jumpAgain) && !attacking)
+        if(Input.GetKeyDown(master.controls.GetJumpKey()) && (grounded || jumpAgain || (againstWall && hasWallJump)) && !attacking)
         {
             if(grounded)
                 rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
                 
+            else if(againstWall && hasWallJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(new Vector2(jumpSpeed * -0.7f * direction, jumpSpeed * 0.7f), ForceMode2D.Impulse);
+            }    
+            
             else if(jumpAgain)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
@@ -195,12 +212,20 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey("left"))
         {
             moving = true;
+            
+            if(direction == 1)
+                changeDirection = true;
+                
             direction = -1;
         }
         
         else if(Input.GetKey("right"))
         {
             moving = true;
+            
+            if(direction == -1)
+                changeDirection = true;
+                
             direction = 1;
         }
         
@@ -217,12 +242,35 @@ public class PlayerController : MonoBehaviour
             
             if(hit.collider == null && hitFeet.collider == null)
             {
+                if(changeDirection)
+                {
+                    if((direction == -1 && rb.velocity.x > 0) || (direction == 1 && rb.velocity.x < 0))
+                        rb.velocity = new Vector2(0, rb.velocity.y);
+                }
+                
                 if(dashing)
-                    rb.velocity = new Vector2(dashSpeed * direction, rb.velocity.y);
-                    
+                {
+                    //rb.velocity = new Vector2(dashSpeed * direction, rb.velocity.y);
+                    if((direction == -1 && rb.velocity.x > dashSpeed * -1) || (direction == 1 && rb.velocity.x < dashSpeed))
+                    {
+                        rb.AddForce(new Vector2(dashSpeed * Time.deltaTime * direction, 0), ForceMode2D.Impulse);
+                    }
+                }
+                
                 else
-                    rb.velocity = new Vector2(moveSpeed * direction, rb.velocity.y);
+                {
+                    //rb.velocity = new Vector2(moveSpeed * direction, rb.velocity.y);
+                    if((direction == -1 && rb.velocity.x > moveSpeed * -1) || (direction == 1 && rb.velocity.x < moveSpeed))
+                    {
+                        rb.AddForce(new Vector2(moveSpeed * Time.deltaTime * direction, 0), ForceMode2D.Impulse);
+                    }
+                }
+                    
+                againstWall = false;
             }
+            
+            else
+                againstWall = true;
         }
         
         else
@@ -440,6 +488,8 @@ public class PlayerController : MonoBehaviour
         
         //Magic//
         mpBar.AdjustBar(currentMP, maxMP);
+        
+        changeDirection = false;
     }
     
     ////////////////////////////////////////
