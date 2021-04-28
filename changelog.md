@@ -6,10 +6,11 @@
 * Added the ability to double jump. Pressing the jump button in mid-air will allow the player to jump again.
 * Tweaked the new player physics, fixing the gravity problems near the edge of platforms. Hopefully without any weird side-effects.
 * Tweaked the terrain's colliders, fixing the slowdown when jumping into a wall.
+* Tweaked the player's wall and ground collision detection. The player now stops *much* closer to the floor and walls.
 
 ### Known Issues
 * ~~The player's gravity does not function properly when quickly moving left and right at the edge of a platform.~~
-* The player's new gravity causes the player to float slightly above the ground. Though it does not interfere with gameplay any, it's looks *really* bad.
+* ~~The player's new gravity causes the player to float slightly above the ground. Though it does not interfere with gameplay any, it's looks *really* bad.~~
 * ~~Player's vertical velocity slows significantly when jumping into a wall.~~
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
 
