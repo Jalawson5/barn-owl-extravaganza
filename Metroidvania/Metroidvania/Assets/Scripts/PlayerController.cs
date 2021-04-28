@@ -53,6 +53,18 @@ public class PlayerController : MonoBehaviour
     
     public MasterController master;
     
+    private bool hasDoubleJump;
+    private bool hasWallJump;
+    private bool hasRockBreaker;
+    private bool hasSlide;
+    private bool hasSwim;
+    private bool hasKey;
+    
+    private bool jumpAgain;
+    
+    [SerializeField]
+    private float gravity;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -92,12 +104,27 @@ public class PlayerController : MonoBehaviour
         iframes = 1f;
         iframesTimer = 1f;
         
+        hasDoubleJump = true; //stats.HasDoubleJump();
+        hasWallJump = stats.HasWallJump();
+        hasRockBreaker = stats.HasRockBreaker();
+        hasSlide = stats.HasSlide();
+        hasSwim = stats.HasSwim();
+        hasKey = stats.HasKey();
+        
+        jumpAgain = false;
+        
         master = MasterController.instance;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!grounded)
+        {
+            rb.velocity -= new Vector2(0, gravity * Time.deltaTime);
+        }
+    
         //Is the player on the ground?//
         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
         RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.4f, 0), Vector2.down, 0.2f, terrainLayer);
@@ -111,12 +138,24 @@ public class PlayerController : MonoBehaviour
         else
         {
             grounded = true;
+            
+            if(hasDoubleJump)
+                jumpAgain = true;
         }
         
         //Jump Controls//
-        if(Input.GetKeyDown(master.controls.GetJumpKey()) && grounded && !attacking)
+        if(Input.GetKeyDown(master.controls.GetJumpKey()) && (grounded || jumpAgain) && !attacking)
         {
-            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            if(grounded)
+                rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                
+            else if(jumpAgain)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpSpeed * 0.7f, ForceMode2D.Impulse); //Slightly weaker jump when double jumping//
+                jumpAgain = false;
+            }
+            
             jumping = true;
         }
         

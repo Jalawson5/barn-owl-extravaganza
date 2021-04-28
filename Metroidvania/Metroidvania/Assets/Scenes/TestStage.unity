@@ -5427,12 +5427,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ac5cfd772447746bbf095f97512ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 12
+  jumpSpeed: 8
   currWeapon: {fileID: 11400000, guid: 456cf1830e6dc414fb2a31813f14cc5b, type: 2}
   skill1: {fileID: 11400000, guid: 12a3b184fb370e841b9a02c80e265f8c, type: 2}
   skill2: {fileID: 0}
   hpBar: {fileID: 718931798}
   mpBar: {fileID: 249839355}
+  master: {fileID: 0}
+  gravity: 10
 --- !u!212 &1581376196
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5498,7 +5500,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.8
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -5844,6 +5846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4619500f57a42f6448302837cb568c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
 --- !u!4 &1732778340
 Transform:
   m_ObjectHideFlags: 0
