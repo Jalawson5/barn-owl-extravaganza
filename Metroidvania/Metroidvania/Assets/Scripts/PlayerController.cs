@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -242,7 +243,6 @@ public class PlayerController : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.5f * direction, 0, 0), (direction == -1)?Vector2.left:Vector2.right, 0.05f, terrainLayer);
             RaycastHit2D hitFeet = Physics2D.Raycast(transform.position + new Vector3(0.5f * direction, -0.5f, 0), (direction == -1)?Vector2.left:Vector2.right, 0.05f, terrainLayer);
-            
             if(hit.collider == null && hitFeet.collider == null)
             {
                 if(changeDirection)
@@ -273,7 +273,9 @@ public class PlayerController : MonoBehaviour
             }
             
             else
+            {
                 againstWall = true;
+            }
         }
         
         else
@@ -494,6 +496,12 @@ public class PlayerController : MonoBehaviour
         mpBar.AdjustBar(currentMP, maxMP);
         
         changeDirection = false;
+        
+        //If velocity.x is extremely small, ignore velocity.x//
+        if(Math.Abs(rb.velocity.x) < 0.1f)
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+        }
     }
     
     ////////////////////////////////////////
