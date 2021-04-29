@@ -5,7 +5,7 @@
 * Tweaked player physics to feel a bit better when wall jumping.
 
 ### Known Issues
-* Player sometimes pushes away from the wall *ever so slightly* when wall jumping near the top of a wall. Does not seem to have a major impact on gameplay. Cause unknown.
+* Player sometimes pushes away from the wall *ever so slightly* when falling from the edge of a cliff against the wall. Does not seem to have a major impact on gameplay. Cause unknown.
 * Player movement feels a bit sluggish with the new method of movement. It's getting there.
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
 
