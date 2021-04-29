@@ -1,5 +1,14 @@
 # Changelog
 
+## April 29, 2021
+### Changes
+* Tweaked player physics to feel a bit better when wall jumping.
+
+### Known Issues
+* Player sometimes pushes away from the wall *ever so slightly* when wall jumping near the top of a wall. Does not seem to have a major impact on gameplay. Cause unknown.
+* Player movement feels a bit sluggish with the new method of movement. It's getting there.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## April 28, 2021
 ### Changes
 * Reworked player physics. The player character now calculates gravity separately from Unity's built-in physics to allow for...
