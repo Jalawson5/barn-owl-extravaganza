@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     
     private bool jumpAgain;
     private bool againstWall;
+    private bool wallJumped;
     
     private float gravity;
     
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
         
         jumpAgain = false;
         againstWall = false;
+        wallJumped = false;
         
         master = MasterController.instance;
         
@@ -173,6 +175,8 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(0f, 0f);
                 rb.AddForce(new Vector2(jumpSpeed * -1.5f * direction, jumpSpeed * 0.7f), ForceMode2D.Impulse);
+                wallJumped = true;
+                Debug.Log("Wall Jump");
             }    
             
             else if(jumpAgain)
@@ -495,12 +499,19 @@ public class PlayerController : MonoBehaviour
         //Magic//
         mpBar.AdjustBar(currentMP, maxMP);
         
+        //Reset any single-frame variables//
         changeDirection = false;
+        wallJumped = false;
         
         //If velocity.x is extremely small, ignore velocity.x//
         if(Math.Abs(rb.velocity.x) < 0.1f)
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
+        }
+        
+        if(Math.Abs(rb.velocity.x) > 7f)
+        {
+            rb.velocity = new Vector2(7f * direction, rb.velocity.y);
         }
     }
     
