@@ -4,10 +4,11 @@
 ### Changes
 * Tweaked player physics to feel a bit better when wall jumping.
 * Further tweaked player physics to fix the issue of pushing away from the wall.
+* Added a maximum horizontal velocity to the player to prevent inexplicable circumstances where the player suddenly moves incredibly fast.
 
 ### Known Issues
 * ~~Player sometimes pushes away from the wall *ever so slightly* when falling from the edge of a cliff against the wall. Does not seem to have a major impact on gameplay. Cause unknown.~~
-* With precise inputs, the player can launch incredibly fast from a wall when wall jumping. I believe this has something to do with combining the player's inherent move speed with the force of the jump.
+* ~~With precise inputs, the player can launch incredibly fast from a wall when wall jumping. I believe this has something to do with combining the player's inherent move speed with the force of the jump.~~ Resolved, kinda.
 * Player movement feels a bit sluggish with the new method of movement. It's getting there.
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
 
