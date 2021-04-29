@@ -69,6 +69,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float wallSlide;
     
+    [SerializeField]
+    private float accelConst; //Acceleration Constant helps determine how fast for the player to accelerate.//
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +80,8 @@ public class PlayerController : MonoBehaviour
         jumpTimeMax = 0.7f;
         grounded = false;
         
-        moveSpeed = 5f;
-        dashSpeed = 7f;
+        moveSpeed = 3f;
+        dashSpeed = 5f;
         moving = false;
         direction = 1;
         dashing = false;
@@ -167,8 +170,8 @@ public class PlayerController : MonoBehaviour
                 
             else if(againstWall && hasWallJump)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(new Vector2(jumpSpeed * -0.7f * direction, jumpSpeed * 0.7f), ForceMode2D.Impulse);
+                rb.velocity = new Vector2(0f, 0f);
+                rb.AddForce(new Vector2(jumpSpeed * -1.5f * direction, jumpSpeed * 0.7f), ForceMode2D.Impulse);
             }    
             
             else if(jumpAgain)
@@ -253,7 +256,7 @@ public class PlayerController : MonoBehaviour
                     //rb.velocity = new Vector2(dashSpeed * direction, rb.velocity.y);
                     if((direction == -1 && rb.velocity.x > dashSpeed * -1) || (direction == 1 && rb.velocity.x < dashSpeed))
                     {
-                        rb.AddForce(new Vector2(dashSpeed * Time.deltaTime * direction, 0), ForceMode2D.Impulse);
+                        rb.AddForce(new Vector2(dashSpeed * accelConst * direction, 0), ForceMode2D.Impulse);
                     }
                 }
                 
@@ -262,7 +265,7 @@ public class PlayerController : MonoBehaviour
                     //rb.velocity = new Vector2(moveSpeed * direction, rb.velocity.y);
                     if((direction == -1 && rb.velocity.x > moveSpeed * -1) || (direction == 1 && rb.velocity.x < moveSpeed))
                     {
-                        rb.AddForce(new Vector2(moveSpeed * Time.deltaTime * direction, 0), ForceMode2D.Impulse);
+                        rb.AddForce(new Vector2(moveSpeed * accelConst * direction, 0), ForceMode2D.Impulse);
                     }
                 }
                     
@@ -276,6 +279,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
+            againstWall = false;
         }
         
         //Attack controls//

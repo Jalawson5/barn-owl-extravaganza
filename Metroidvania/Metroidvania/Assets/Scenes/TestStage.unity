@@ -5455,6 +5455,7 @@ MonoBehaviour:
   mpBar: {fileID: 249839355}
   master: {fileID: 1732778339}
   wallSlide: 2
+  accelConst: 0.5
 --- !u!212 &1581376196
 SpriteRenderer:
   m_ObjectHideFlags: 0
