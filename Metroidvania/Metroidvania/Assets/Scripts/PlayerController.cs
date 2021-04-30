@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
             dashTimer = 0.3f;
         }
         
-        else if((Input.GetKeyDown("left") || Input.GetKeyDown("right")) && dashTimer > 0)
+        else if((Input.GetKeyDown("left") || Input.GetKeyDown("right")) && dashTimer > 0 && grounded)
         {
             dashing = true;
         }
