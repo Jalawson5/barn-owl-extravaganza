@@ -3,10 +3,11 @@
 ## April 30, 2021
 ### Changes
 * Added breakable blocks. These blocks are treated as solid terrain, but can be broken with attacks, opening new paths.
+* Wall-jumps now require timed inputs and prevent the player from infinitely jumping against the wall. Numbers still need tweaking.
 
 ### Known Issues
-* It turns out wall-jumping still doesn't work properly. You only jump off the wall when you press the direction away from the wall with good timing. Otherwise, you just float up the wall which isn't what I want.
-* * Player movement feels a bit sluggish with the new method of movement. It's getting there.
+* ~~It turns out wall-jumping still doesn't work properly. You only jump off the wall when you press the direction away from the wall with good timing. Otherwise, you just float up the wall which isn't what I want.~~
+* Player movement feels a bit sluggish with the new method of movement. Someday I'll be happy with the movement. Someday...
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
 
 ## April 29, 2021
