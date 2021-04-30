@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpAgain;
     private bool againstWall;
     private bool wallJumped;
+    private int wallJumpFrames; //Number of frames during which a wall-jump can be performed//
     
     private float gravity;
     
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour
         jumpAgain = false;
         againstWall = false;
         wallJumped = false;
+        wallJumpFrames = 5;
         
         master = MasterController.instance;
         
@@ -171,12 +173,12 @@ public class PlayerController : MonoBehaviour
             if(grounded)
                 rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
                 
-            else if(againstWall && hasWallJump)
+            else if(hasWallJump && wallJumpFrames > 0)
             {
                 rb.velocity = new Vector2(0f, 0f);
                 rb.AddForce(new Vector2(jumpSpeed * -1.5f * direction, jumpSpeed * 0.7f), ForceMode2D.Impulse);
                 wallJumped = true;
-                Debug.Log("Wall Jump");
+                wallJumpFrames = 0;
             }    
             
             else if(jumpAgain)
@@ -272,13 +274,19 @@ public class PlayerController : MonoBehaviour
                         rb.AddForce(new Vector2(moveSpeed * accelConst * direction, 0), ForceMode2D.Impulse);
                     }
                 }
-                    
+                
+                if(againstWall)
+                {
+                    wallJumpFrames = 40;
+                }
+                
                 againstWall = false;
             }
             
             else
             {
                 againstWall = true;
+                wallJumpFrames = 0;
             }
         }
         
@@ -286,6 +294,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
             againstWall = false;
+        }
+        
+        if(wallJumpFrames > 0)
+        {
+            wallJumpFrames--;
         }
         
         //Attack controls//
