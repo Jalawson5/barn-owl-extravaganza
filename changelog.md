@@ -1,5 +1,13 @@
 # Changelog
 
+## May 1, 2021
+### Changes
+* The player can now only break blocks if they have the Rock Breaker ability. 
+
+### Known Issues
+* Still working on making player movement feel right.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## April 30, 2021
 ### Changes
 * Added breakable blocks. These blocks are treated as solid terrain, but can be broken with attacks, opening new paths.
