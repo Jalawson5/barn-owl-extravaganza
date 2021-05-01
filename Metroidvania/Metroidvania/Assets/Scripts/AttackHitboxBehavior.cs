@@ -54,7 +54,7 @@ public class AttackHitboxBehavior : MonoBehaviour
             other.gameObject.GetComponent<EnemyBehavior>().TakeDamage(parentScript.stats, baseAttack, isMagical);
         }
         
-        else if(other.gameObject.tag == "Breakable")
+        else if(other.gameObject.tag == "Breakable" && parentScript.CanBreak())
         {
             //Do whatever animations//
             Destroy(other.gameObject);

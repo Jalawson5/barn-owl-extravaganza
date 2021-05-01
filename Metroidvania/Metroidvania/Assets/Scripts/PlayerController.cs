@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         
         hasDoubleJump = true; //stats.HasDoubleJump();
         hasWallJump = true; //stats.HasWallJump();
-        hasRockBreaker = stats.HasRockBreaker();
+        hasRockBreaker = true; //stats.HasRockBreaker();
         hasSlide = stats.HasSlide();
         hasSwim = stats.HasSwim();
         hasKey = stats.HasKey();
@@ -603,6 +603,15 @@ public class PlayerController : MonoBehaviour
         }
         
         iframesTimer = 0;
+    }
+    
+    ////////////////////////////////////////////////////////
+    //bool CanBreak()                                     //
+    //Returns true if the player has hasRockBreaker = true//
+    ////////////////////////////////////////////////////////
+    public bool CanBreak()
+    {
+        return hasRockBreaker;
     }
     
     ////////////////////////////////////////////////
