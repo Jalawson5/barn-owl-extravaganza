@@ -1,5 +1,14 @@
 # Changelog
 
+## May 3, 2021
+### Changes
+* Gave the player character a taller sprite and hitbox to get a better feel for how movement feels with more realistic dimensions.
+* Tweaked the player's collision detection to account for different hitbox dimensions. Something I should have fixed a long time ago.
+
+### Known Issues
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 1, 2021
 ### Changes
 * The player can now only break blocks if they have the Rock Breaker ability. 
