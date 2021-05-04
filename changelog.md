@@ -1,5 +1,14 @@
 # Changelog
 
+## May 4, 2021
+### Changes
+* Added the ability to crouch by holding "down" while on the ground. This state shortens the player's hitbox. The player cannot move left and right while crouching, but can cancel the crouch by jumping.
+
+### Known Issues
+* Player can still launch from the wall when wall jumping. It seems this only occurs when pressing away from the wall and pressing the jump button on the same frame, but the exact cause is unknown.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 3, 2021
 ### Changes
 * Gave the player character a taller sprite and hitbox to get a better feel for how movement feels with more realistic dimensions.
