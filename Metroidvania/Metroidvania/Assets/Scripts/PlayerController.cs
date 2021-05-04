@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     
     //Crouching and Sliding Variables//
     private bool crouching; //Is the player currently crouching?//
+    private bool canStand; //Does the player have room to stand?//
     private bool sliding; //Is the player currently sliding?//
     private float slideForce; //Force of the player's slide//
     private float slideTimer; //Time spent sliding//
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
         changeDirection = false;
         
         crouching = false;
+        canStand = true;
         sliding = false;
         slideForce = 5f;
         slideTimer = 0f;
@@ -257,6 +259,18 @@ public class PlayerController : MonoBehaviour
         }
         
         //Crouching and Sliding//
+        if(crouching)
+        {
+            hitLeft = Physics2D.Raycast(transform.position + new Vector3(width * -1, height / 2f, 0), Vector2.up, 1.2f,  terrainLayer);
+            hitRight = Physics2D.Raycast(transform.position + new Vector3(width, height / 2f, 0), Vector2.up, 1.2f, terrainLayer);
+            
+            if(hitLeft.collider != null || hitRight.collider != null)
+                canStand = false;
+                
+            else
+                canStand = true;
+        }
+        
         if(Input.GetKey("down") && grounded)
         {
             if(!crouching)
@@ -268,7 +282,7 @@ public class PlayerController : MonoBehaviour
             crouching = true;
         }
         
-        else
+        else if(canStand)
         {
             if(crouching)
             {
