@@ -22,7 +22,17 @@ public class PlayerController : MonoBehaviour
     private float dashTimer; //How fast the player must double-tap move keys to dash//
     private bool changeDirection; //Has the player changed direction this frame?//
     
-    private Rigidbody2D rb;
+    //Crouching and Sliding Variables//
+    private bool crouching; //Is the player currently crouching?//
+    private bool sliding; //Is the player currently sliding?//
+    private float slideForce; //Force of the player's slide//
+    
+    //////////////////////////////////////////////////////////////
+    //Note about player states:                                 //
+    //The player cannot move while crouching                    //
+    //The player can jump while crouching, cancelling the crouch//
+    //Crouching while moving cancels movement                   //
+    //////////////////////////////////////////////////////////////
     
     //Attacking and Weapon Variables//
     private WeaponType weaponType; //The type of weapon that is currently equipped//
@@ -53,8 +63,6 @@ public class PlayerController : MonoBehaviour
     public UIBarBehavior hpBar;
     public UIBarBehavior mpBar;
     
-    public MasterController master;
-    
     //Ability Variables//
     private bool hasDoubleJump;
     private bool hasWallJump;
@@ -79,9 +87,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float accelConst; //Acceleration Constant helps determine how fast for the player to accelerate.//
     
+    //References to other Components and Objects//
+    public MasterController master;
+    private Rigidbody2D rb;
+    private BoxCollider2D col;
+    
     // Start is called before the first frame update
     void Start()
     {
+        master = MasterController.instance;
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        col = gameObject.GetComponent<BoxCollider2D>();
+    
         //jumpSpeed = 16.5f;
         jumpTime = 0f;
         jumpTimeMax = 0.7f;
@@ -94,8 +111,6 @@ public class PlayerController : MonoBehaviour
         dashing = false;
         dashTimer = 0f;
         changeDirection = false;
-        
-        rb = gameObject.GetComponent<Rigidbody2D>();
         
         weaponType = currWeapon.type;
         weaponTimerMax = weaponType.speed;
@@ -131,10 +146,8 @@ public class PlayerController : MonoBehaviour
         wallJumped = false;
         wallJumpFrames = 5;
         
-        master = MasterController.instance;
-        
-        height = gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2;
-        width = gameObject.GetComponent<BoxCollider2D>().bounds.size.x / 2;
+        height = col.bounds.size.y / 2;
+        width = col.bounds.size.x / 2;
         
         gravity = 10f;
     }
@@ -226,7 +239,29 @@ public class PlayerController : MonoBehaviour
             dashTimer -= Time.deltaTime;
         }
         
-        if(Input.GetKey("left"))
+        if(Input.GetKey("down") && grounded)
+        {
+            if(!crouching)
+            {
+                col.size = new Vector3(col.size.x, col.size.y / 2);
+                col.offset = new Vector2(col.offset.x, col.size.y / -2);
+            }
+            
+            crouching = true;
+        }
+        
+        else
+        {
+            if(crouching)
+            {
+                col.size = new Vector3(col.size.x, col.size.y * 2);
+                col.offset = new Vector2(col.offset.x, 0);
+            }
+            
+            crouching = false;
+        }
+        
+        if(Input.GetKey("left") && !crouching)
         {
             moving = true;
             
@@ -236,7 +271,7 @@ public class PlayerController : MonoBehaviour
             direction = -1;
         }
         
-        else if(Input.GetKey("right"))
+        else if(Input.GetKey("right") && !crouching)
         {
             moving = true;
             
