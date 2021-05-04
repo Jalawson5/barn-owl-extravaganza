@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private bool crouching; //Is the player currently crouching?//
     private bool sliding; //Is the player currently sliding?//
     private float slideForce; //Force of the player's slide//
+    private float slideTimer; //Time spent sliding//
+    private float slideTimerMax; //Maximum slide time//
     
     //////////////////////////////////////////////////////////////
     //Note about player states:                                 //
@@ -112,6 +114,12 @@ public class PlayerController : MonoBehaviour
         dashTimer = 0f;
         changeDirection = false;
         
+        crouching = false;
+        sliding = false;
+        slideForce = 5f;
+        slideTimer = 0f;
+        slideTimerMax = 0.5f;
+        
         weaponType = currWeapon.type;
         weaponTimerMax = weaponType.speed;
         weaponTimer = 0f;
@@ -137,7 +145,7 @@ public class PlayerController : MonoBehaviour
         hasDoubleJump = true; //stats.HasDoubleJump();
         hasWallJump = true; //stats.HasWallJump();
         hasRockBreaker = true; //stats.HasRockBreaker();
-        hasSlide = stats.HasSlide();
+        hasSlide = true; //stats.HasSlide();
         hasSwim = stats.HasSwim();
         hasKey = stats.HasKey();
         
@@ -159,9 +167,12 @@ public class PlayerController : MonoBehaviour
         {
             if(againstWall && hasWallJump && moving)
                 rb.velocity -= new Vector2(0, wallSlide * Time.deltaTime);
-            
+
             else
                 rb.velocity -= new Vector2(0, gravity * Time.deltaTime);
+                
+            sliding = false;
+            slideTimer = 0f;
         }
         
         else if(!jumping)
@@ -190,8 +201,13 @@ public class PlayerController : MonoBehaviour
         //Jump Controls//
         if(Input.GetKeyDown(master.controls.GetJumpKey()) && (grounded || jumpAgain || (againstWall && hasWallJump)) && !attacking)
         {
-            if(grounded)
+            if(grounded && (!crouching || (crouching && !hasSlide)))
                 rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            
+            else if(crouching && hasSlide)
+            {
+                sliding = true;
+            }
                 
             else if(hasWallJump && wallJumpFrames > 0)
             {
@@ -208,7 +224,8 @@ public class PlayerController : MonoBehaviour
                 jumpAgain = false;
             }
             
-            jumping = true;
+            if(!sliding)
+                jumping = true;
         }
         
         if(jumping && (jumpTime > jumpTimeMax || Input.GetKeyUp(master.controls.GetJumpKey())) && rb.velocity.y >= 0)
@@ -239,6 +256,7 @@ public class PlayerController : MonoBehaviour
             dashTimer -= Time.deltaTime;
         }
         
+        //Crouching and Sliding//
         if(Input.GetKey("down") && grounded)
         {
             if(!crouching)
@@ -259,6 +277,20 @@ public class PlayerController : MonoBehaviour
             }
             
             crouching = false;
+            sliding = false;
+            slideTimer = 0f;
+        }
+        
+        if(sliding)
+        {
+            rb.AddForce(new Vector2(slideForce * direction, 0f), ForceMode2D.Impulse);
+            slideTimer += Time.deltaTime;
+        }
+        
+        if(slideTimer >= slideTimerMax)
+        {
+            sliding = false;
+            slideTimer = 0f;
         }
         
         if(Input.GetKey("left") && !crouching)
@@ -332,7 +364,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        else
+        else if(!sliding)
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
             againstWall = false;
