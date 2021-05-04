@@ -293,9 +293,10 @@ public class PlayerController : MonoBehaviour
             slideTimer = 0f;
         }
         
-        if(Input.GetKey("left") && !crouching)
+        if(Input.GetKey("left"))
         {
-            moving = true;
+            if(!crouching)
+                moving = true;
             
             if(direction == 1)
                 changeDirection = true;
@@ -303,9 +304,10 @@ public class PlayerController : MonoBehaviour
             direction = -1;
         }
         
-        else if(Input.GetKey("right") && !crouching)
+        else if(Input.GetKey("right"))
         {
-            moving = true;
+            if(!crouching)
+                moving = true;
             
             if(direction == -1)
                 changeDirection = true;
