@@ -6,6 +6,7 @@
 * Tweaked the player's collision detection to account for different hitbox dimensions. Something I should have fixed a long time ago.
 
 ### Known Issues
+* Player can still launch from the wall when wall jumping. It seems this only occurs when pressing away from the wall and pressing the jump button on the same frame, but the exact cause is unknown.
 * Still working on player movement.
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
 
