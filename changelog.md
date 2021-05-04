@@ -4,11 +4,12 @@
 ### Changes
 * Added the ability to crouch by holding "down" while on the ground. This state shortens the player's hitbox. The player cannot move left and right while crouching, but can cancel the crouch by jumping.
 * Added the ability to slide by pressing the jump button while crouching. This is only usable if the player has unlocked the ability to slide.
+* Tweaked player movement to allow for changing direction while crouching. This also allows for the player to change direction while sliding; an unintended but expected side-effect I may consider leaving in.
 
 ### Known Issues
 * Player can still launch from the wall when wall jumping. It seems this only occurs when pressing away from the wall and pressing the jump button on the same frame, but the exact cause is unknown.
 * If the player attempts to stand back up (simply let go of "down") when there is no room to stand up, the player will get stuck in the ceiling. This can be done by sliding into a narrow passage and standing up before reaching the other side.
-* The player cannot change direction while crouching.
+* ~~The player cannot change direction while crouching.~~
 * Still working on player movement.
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
 
