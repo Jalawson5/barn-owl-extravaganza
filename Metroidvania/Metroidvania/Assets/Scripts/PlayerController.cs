@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     private float slideTimer; //Time spent sliding//
     private float slideTimerMax; //Maximum slide time//
     
+    //Underwater variables//
+    private bool underwater; //Is the player underwater?//
+    private float waterDrag; //Force multiplier for being underwater//
+    
     //////////////////////////////////////////////////////////////
     //Note about player states:                                 //
     //The player cannot move while crouching                    //
@@ -130,6 +134,9 @@ public class PlayerController : MonoBehaviour
         chargeTimeMax = 2f;
         shortCharge = 1f;
         
+        underwater = false;
+        waterDrag = 0.5f;
+        
         terrainLayer = LayerMask.GetMask("Solid");
         
         stats = new CharacterData.CharacterEntry(CharacterData.warrior, "Dummy");
@@ -165,13 +172,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float drag = underwater?waterDrag:1f; //If player is underwater, apply waterDrag//
+        Debug.Log(drag);
+            
         if(!grounded)
         {
             if(againstWall && hasWallJump && moving)
-                rb.velocity -= new Vector2(0, wallSlide * Time.deltaTime);
+                rb.velocity -= new Vector2(0, wallSlide * Time.deltaTime * drag);
 
             else
-                rb.velocity -= new Vector2(0, gravity * Time.deltaTime);
+                rb.velocity -= new Vector2(0, gravity * Time.deltaTime * drag);
                 
             sliding = false;
             slideTimer = 0f;
@@ -204,7 +214,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(master.controls.GetJumpKey()) && (grounded || jumpAgain || (againstWall && hasWallJump)) && !attacking)
         {
             if(grounded && (!crouching || (crouching && !hasSlide)))
-                rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpSpeed * drag, ForceMode2D.Impulse);
             
             else if(crouching && hasSlide)
             {
@@ -214,7 +224,7 @@ public class PlayerController : MonoBehaviour
             else if(hasWallJump && wallJumpFrames > 0)
             {
                 rb.velocity = new Vector2(0f, 0f);
-                rb.AddForce(new Vector2(jumpSpeed * -1.5f * direction, jumpSpeed * 0.7f), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(jumpSpeed * -1.5f * direction, jumpSpeed * 0.7f) * drag, ForceMode2D.Impulse);
                 wallJumped = true;
                 wallJumpFrames = 0;
             }    
@@ -222,7 +232,7 @@ public class PlayerController : MonoBehaviour
             else if(jumpAgain)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(Vector2.up * jumpSpeed * 0.7f, ForceMode2D.Impulse); //Slightly weaker jump when double jumping//
+                rb.AddForce(Vector2.up * jumpSpeed * 0.7f * drag, ForceMode2D.Impulse); //Slightly weaker jump when double jumping//
                 jumpAgain = false;
             }
             
@@ -352,7 +362,7 @@ public class PlayerController : MonoBehaviour
                     //rb.velocity = new Vector2(dashSpeed * direction, rb.velocity.y);
                     if((direction == -1 && rb.velocity.x > dashSpeed * -1) || (direction == 1 && rb.velocity.x < dashSpeed))
                     {
-                        rb.AddForce(new Vector2(dashSpeed * accelConst * direction, 0), ForceMode2D.Impulse);
+                        rb.AddForce(new Vector2(dashSpeed * accelConst * direction, 0) * drag, ForceMode2D.Impulse);
                     }
                 }
                 
@@ -361,7 +371,7 @@ public class PlayerController : MonoBehaviour
                     //rb.velocity = new Vector2(moveSpeed * direction, rb.velocity.y);
                     if((direction == -1 && rb.velocity.x > moveSpeed * -1) || (direction == 1 && rb.velocity.x < moveSpeed))
                     {
-                        rb.AddForce(new Vector2(moveSpeed * accelConst * direction, 0), ForceMode2D.Impulse);
+                        rb.AddForce(new Vector2(moveSpeed * accelConst * direction, 0) * drag, ForceMode2D.Impulse);
                     }
                 }
                 
@@ -712,4 +722,22 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("You got dead :(");
     }
+    
+    public void OnTriggerEnter2D(Collider2D other)
+    {Debug.Log("Trigger Entered");
+        if(other.gameObject.layer == 15)
+        {
+            underwater = true;
+        }
+    }
+    
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.layer == 15)
+        {
+            underwater = false;
+        }
+    }
+    
+    
 }
