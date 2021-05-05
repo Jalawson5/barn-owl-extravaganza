@@ -5,7 +5,7 @@
 * Added water to the game. While underwater, the player's movement is slowed.
 
 ### Known Issues
-* When wall jumping while underwater, the wall jump may force the player back into the wall. This is clearly a side-effect of being affected by drag when the player is underwater, being the only difference between wall jumping underwater and above, but the exact cause is unknown.
+* When wall jumping (except frame perfect wall jumps), the player is pushed back to the wall. This is due to how the force for a wall jump is calculated. This occurs both underwater and above; however, it is far more noticable underwater due to the slower movement.
 * Player can still launch from the wall when wall jumping. It seems this only occurs when pressing away from the wall and pressing the jump button on the same frame, but the exact cause is unknown.
 * The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
 * Still working on player movement.
