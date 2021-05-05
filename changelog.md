@@ -1,5 +1,16 @@
 # Changelog
 
+## May 5, 2021
+### Changes
+* Added water to the game. While underwater, the player's movement is slowed.
+
+### Known Issues
+* When wall jumping (except frame perfect wall jumps), the player is pushed back to the wall. This is due to how the force for a wall jump is calculated. This occurs both underwater and above; however, it is far more noticable underwater due to the slower movement.
+* Player can still launch from the wall when wall jumping. It seems this only occurs when pressing away from the wall and pressing the jump button on the same frame, but the exact cause is unknown.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 4, 2021
 ### Changes
 * Added the ability to crouch by holding "down" while on the ground. This state shortens the player's hitbox. The player cannot move left and right while crouching, but can cancel the crouch by jumping.
