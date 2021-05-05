@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
     private bool againstWall;
     private bool wallJumped;
     private int wallJumpFrames; //Number of frames during which a wall-jump can be performed//
+    private int wallDirection;
     
     //Physics Variables//
     private float gravity;
@@ -162,6 +163,7 @@ public class PlayerController : MonoBehaviour
         againstWall = false;
         wallJumped = false;
         wallJumpFrames = 5;
+        wallDirection = direction;
         
         height = col.bounds.size.y / 2;
         width = col.bounds.size.x / 2;
@@ -173,7 +175,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float drag = underwater?waterDrag:1f; //If player is underwater, apply waterDrag//
-        Debug.Log(drag);
             
         if(!grounded)
         {
@@ -224,9 +225,12 @@ public class PlayerController : MonoBehaviour
             else if(hasWallJump && wallJumpFrames > 0)
             {
                 rb.velocity = new Vector2(0f, 0f);
-                rb.AddForce(new Vector2(jumpSpeed * -1.5f * direction, jumpSpeed * 0.7f) * drag, ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(jumpSpeed * -1.5f * wallDirection * drag, jumpSpeed * 0.7f * drag), ForceMode2D.Impulse);
+                Debug.Log("Force: " + (jumpSpeed * -1.5f * wallDirection * drag));
+                Debug.Log("Normal Force: " + (jumpSpeed * -1.5f * wallDirection));
                 wallJumped = true;
                 wallJumpFrames = 0;
+                Debug.Log("Jump");
             }    
             
             else if(jumpAgain)
@@ -387,6 +391,7 @@ public class PlayerController : MonoBehaviour
             {
                 againstWall = true;
                 wallJumpFrames = 0;
+                wallDirection = direction;
             }
         }
         
