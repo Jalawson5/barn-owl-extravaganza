@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
         hasWallJump = true; //stats.HasWallJump();
         hasRockBreaker = true; //stats.HasRockBreaker();
         hasSlide = true; //stats.HasSlide();
-        hasSwim = stats.HasSwim();
+        hasSwim = true; //stats.HasSwim();
         hasKey = stats.HasKey();
         
         jumpAgain = false;
@@ -232,6 +232,12 @@ public class PlayerController : MonoBehaviour
                 wallJumpFrames = 0;
                 Debug.Log("Jump");
             }    
+            
+            else if(hasSwim && underwater)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpSpeed * 0.7f * drag, ForceMode2D.Impulse);
+            }
             
             else if(jumpAgain)
             {
