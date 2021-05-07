@@ -1,5 +1,15 @@
 # Changelog
 
+## May 7, 2021
+### Changes
+* Created and added a simple test font to experiment with. This font will not be in the final game.
+
+### Known Issues
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 6, 2021
 ### Changes
 * Added swimming mechanics. For now, swimming grants the player infinite double jumps while underwater if the player has unlocked the ability to swim.
