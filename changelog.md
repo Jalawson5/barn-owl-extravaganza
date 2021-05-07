@@ -3,6 +3,7 @@
 ## May 7, 2021
 ### Changes
 * Created and added a simple test font to experiment with. This font will not be in the final game.
+* Created a container of sorts for dialogue, which will contain all of the information needed for a conversation.
 
 ### Known Issues
 * Wall jump speed needs some tweaking.
