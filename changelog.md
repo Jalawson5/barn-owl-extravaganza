@@ -3,6 +3,7 @@
 ## May 10, 2021
 ### Changes
 * Tweaked the test font to (hopefully) make coding easier in the long-run.
+* Added a "Typewriter" class that will eventually handle writing dialogue to the screen.
 
 ### Known Issues
 * Wall jump speed needs some tweaking.
