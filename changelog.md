@@ -1,5 +1,15 @@
 # Changelog
 
+## May 12, 2021
+### Changes
+* Added 70 characters to the Typewriter.
+
+## Known Issues
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 10, 2021
 ### Changes
 * Tweaked the test font to (hopefully) make coding easier in the long-run.
