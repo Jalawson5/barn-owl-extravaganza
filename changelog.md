@@ -1,5 +1,17 @@
 # Changelog
 
+## May 17, 2021
+Note: I have been out of town for the past few days, and will be out of town for another couple of weeks or so, so updates may be a bit slower at this time.
+### Changes
+* Added fuctionality to the Typewriter. The Typewriter will write dialogue, wrapping to the next line if the dialogue is too long.
+
+### Known Issues
+* When writing to a new dialogue box (if the NPC's dialogue takes multiple windows, for example), the first letter of the dialogue will be incorrect. Cause is currently unknown.
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 12, 2021
 ### Changes
 * Added 70 characters to the Typewriter.
