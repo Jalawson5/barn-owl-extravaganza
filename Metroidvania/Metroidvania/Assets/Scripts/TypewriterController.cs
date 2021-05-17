@@ -67,8 +67,8 @@ public class TypewriterController : MonoBehaviour
         xPointer = startPosition.x;
         yPointer = startPosition.y;
         lineWidth = 4.5f;
-        lineDist = 0.5f;
-        spaceWidth = 0.6f;
+        lineDist = 0.35f;
+        spaceWidth = 0.2f;
         
         wordIndex = 0;
         currentIndex = 0;
@@ -76,7 +76,7 @@ public class TypewriterController : MonoBehaviour
         isTyping = false;
         waitForInput = false;
         
-        typeSpeed = 0.1f;
+        typeSpeed = 0.05f;
         typeTimer = 0f;
         
         master = MasterController.instance;
@@ -126,6 +126,9 @@ public class TypewriterController : MonoBehaviour
                     {
                         waitForInput = true;
                         words = dialogue[dialogueIndex].Split(' ');
+                        wordIndex = 0;
+                        current = words[0];
+                        currentIndex = 0;
                     }
                 }
             
@@ -144,7 +147,6 @@ public class TypewriterController : MonoBehaviour
             isTyping = true;
             xPointer = startPosition.x;
             yPointer = startPosition.y;
-            wordIndex = 0;
             EraseText();
         }
     }
