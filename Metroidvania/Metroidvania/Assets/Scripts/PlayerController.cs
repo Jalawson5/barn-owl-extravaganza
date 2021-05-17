@@ -174,6 +174,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(master.isPaused)
+            return;
+            
         float drag = underwater?waterDrag:1f; //If player is underwater, apply waterDrag//
             
         if(!grounded)

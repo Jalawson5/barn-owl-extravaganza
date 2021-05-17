@@ -124,12 +124,13 @@ public class TypewriterController : MonoBehaviour
                     dialogueIndex++;
                     if(dialogueIndex < dialogue.Length)
                     {
-                        waitForInput = true;
                         words = dialogue[dialogueIndex].Split(' ');
                         wordIndex = 0;
                         current = words[0];
                         currentIndex = 0;
                     }
+                    
+                    waitForInput = true;
                 }
             
                 else
@@ -144,10 +145,15 @@ public class TypewriterController : MonoBehaviour
         else if(waitForInput && Input.GetKeyDown(master.controls.GetAttackKey()))
         {
             waitForInput = false;
-            isTyping = true;
             xPointer = startPosition.x;
             yPointer = startPosition.y;
             EraseText();
+            
+            if(dialogueIndex < dialogue.Length)
+                isTyping = true;
+            
+            else
+                MasterController.instance.isPaused = false;
         }
     }
     
@@ -168,6 +174,8 @@ public class TypewriterController : MonoBehaviour
             
             words = dialogue[dialogueIndex].Split(' ');
             current = words[0];
+            
+            MasterController.instance.isPaused = true;
         }
     }
     
