@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2316633189755706439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2316633189755706438}
+  - component: {fileID: 2316633189755706441}
+  m_Layer: 0
+  m_Name: Initializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2316633189755706438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316633189755706439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2316633189755706441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316633189755706439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a06fa8b626df947968ac42530b085e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initOK: 0
+  onehand: {fileID: 11400000, guid: 9e1494a7028a0d645827dbfac6628c2c, type: 2}
+  twohand: {fileID: 11400000, guid: ccd8ed5cb30196a4f9ead3445744018a, type: 2}
+  spear: {fileID: 11400000, guid: 3c9b402166e53984595f235cc1401089, type: 2}
+  staff: {fileID: 11400000, guid: 40bd5811e51b35249a2e41ba5e140c66, type: 2}
+  tome: {fileID: 11400000, guid: 780e4fe54827e974da0717ec0b51f0b0, type: 2}
+  warrior: {fileID: 11400000, guid: 39ee1a3d454ecdc4191592b6ef370925, type: 2}
+  wizard: {fileID: 11400000, guid: 33e8fbd35222c0f49a01d061af390ccb, type: 2}
+  thief: {fileID: 11400000, guid: 668620096c39a5a448d927a6ea11efc9, type: 2}

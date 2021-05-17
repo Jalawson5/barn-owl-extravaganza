@@ -7,17 +7,38 @@ public class TypewriterController : MonoBehaviour
     public static TypewriterController instance;
     
     [SerializeField]
+    private GameObject letterPrefab;
+    
+    [SerializeField]
     private Sprite[] sprites;
 
     private static float baseDist;
+    private static float distInc;
     
     private Dictionary<char, Letter> letters;
     
+    private List<GameObject> typedText;
+    
+    [SerializeField]
     private Vector2 startPosition;
-    private float lineWidth; //How long can each line of text be?//
+    private float lineWidth; //Maximum x position for dialogue//
     private float lineDist; //How much space between each line of text?//
     private float xPointer; //Current x position of the pointer//
     private float yPointer; //Current y position of the pointer//
+    private float spaceWidth; //Width of the gap between words//
+    
+    private string[] dialogue; //List of dialogue to type//
+    private string[] words; //List of words in current dialogue//
+    private int wordIndex; //Index of the current word//
+    private string current; //Current word to type//
+    private int currentIndex; //Index within the current word//
+    private int dialogueIndex; //Current dialogue//
+    private bool isTyping; //Is the Typewriter currently typing?//
+    private bool waitForInput; //Is the Typewriter waiting for input?//
+    private float typeSpeed; //Time interval to type each character//
+    private float typeTimer; //Timer for typing each character//
+    
+    public MasterController master;
     
     void Awake()
     {
@@ -36,11 +57,116 @@ public class TypewriterController : MonoBehaviour
     void Start()
     {
         InitCharacters();
+        
+        baseDist = 0.1f;
+        distInc = 0.05f;
+        
+        typedText = new List<GameObject>();
+        
+        startPosition = new Vector2(-4.5f, -2f);
+        xPointer = startPosition.x;
+        yPointer = startPosition.y;
+        lineWidth = 4.5f;
+        lineDist = 0.5f;
+        spaceWidth = 0.6f;
+        
+        wordIndex = 0;
+        currentIndex = 0;
+        dialogueIndex = 0;
+        isTyping = false;
+        waitForInput = false;
+        
+        typeSpeed = 0.1f;
+        typeTimer = 0f;
+        
+        master = MasterController.instance;
     }
 
     void Update()
     {
+        if(isTyping)
+        {
+            if(typeTimer < typeSpeed)
+            {
+                typeTimer += Time.deltaTime;
+            }
+            
+            else
+            {
+                Debug.Log(current);
+                Debug.Log(current[currentIndex]);
+                GameObject temp = Instantiate(letterPrefab, new Vector3(xPointer, yPointer, 0), Quaternion.identity);
+                Letter tempLetter = letters[current[currentIndex]];
+                temp.GetComponent<SpriteRenderer>().sprite = tempLetter.sprite;
+                typedText.Add(temp);
+                xPointer += tempLetter.DistToNext();
+                currentIndex++;
+            
+                //If current word has ended, move to next word//
+                if(currentIndex >= current.Length)
+                {
+                    wordIndex++;
+                    currentIndex = 0;
+                    xPointer += spaceWidth;
+                    
+                    if((xPointer + WordWidth(current)) > lineWidth)
+                    {
+                        yPointer -= lineDist;
+                        xPointer = startPosition.x;
+                    }
+                }
+            
+                //If all words in the dialogue are written, wait for input for next dialogue//
+                if(wordIndex >= words.Length)
+                {
+                    isTyping = false;
+                
+                    dialogueIndex++;
+                    if(dialogueIndex < dialogue.Length)
+                    {
+                        waitForInput = true;
+                        words = dialogue[dialogueIndex].Split(' ');
+                    }
+                }
+            
+                else
+                {
+                    current = words[wordIndex];
+                }
+                
+                typeTimer = 0f;
+            }
+        }
         
+        else if(waitForInput && Input.GetKeyDown(master.controls.GetAttackKey()))
+        {
+            waitForInput = false;
+            isTyping = true;
+            xPointer = startPosition.x;
+            yPointer = startPosition.y;
+            wordIndex = 0;
+            EraseText();
+        }
+    }
+    
+    public bool IsTyping()
+    {
+        return isTyping;
+    }
+    
+    public void TypeDialogue(string[] dialogue)
+    {
+        if(!isTyping && !waitForInput)
+        {
+            this.dialogue = dialogue;
+            isTyping = true;
+            dialogueIndex = 0;
+            wordIndex = 0;
+            currentIndex = 0;
+            
+            words = dialogue[dialogueIndex].Split(' ');
+            current = words[0];
+        }
     }
     
     private class Letter
@@ -73,8 +199,33 @@ public class TypewriterController : MonoBehaviour
         ////////////////////////////////////////////////////
         public float DistToNext()
         {
-            return TypewriterController.baseDist * (width - 1);
+            return baseDist + (distInc * width);
         }
+    }
+    
+    //////////////////////////////////////////////////////////
+    //float WordWidth(string)                               //
+    //Calculates and returns the "width" of the input string//
+    //////////////////////////////////////////////////////////
+    private float WordWidth(string word)
+    {
+        float total = 0;
+        for(int i = 0; i < word.Length; i++)
+        {
+            total += letters[word[i]].DistToNext();
+        }
+        
+        return total;
+    }
+    
+    private void EraseText()
+    {
+        for(int i = 0; i < typedText.Count; i++)
+        {
+            Destroy(typedText[i]);
+        }
+        
+        typedText.Clear();
     }
     
     //////////////////////////////////////////////////////////////////////////////
@@ -84,6 +235,8 @@ public class TypewriterController : MonoBehaviour
     private void InitCharacters()
     {
         int i = 0; //Index of sprite array, makes things easier for me in the long-run//
+        
+        letters = new Dictionary<char, Letter>();
         
         //Uppercase Letters//
         letters.Add('A', new Letter(sprites[i++], 6));

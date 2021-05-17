@@ -618,10 +618,12 @@ public class PlayerController : MonoBehaviour
         //UI Updates//
         
         //Health//
-        hpBar.AdjustBar(currentHP, maxHP);
+        if(hpBar != null)
+            hpBar.AdjustBar(currentHP, maxHP);
         
         //Magic//
-        mpBar.AdjustBar(currentMP, maxMP);
+        if(mpBar != null)
+            mpBar.AdjustBar(currentMP, maxMP);
         
         //Reset any single-frame variables//
         changeDirection = false;
