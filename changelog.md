@@ -5,6 +5,7 @@ Note: I have been out of town for the past few days, and will be out of town for
 ### Changes
 * Added fuctionality to the Typewriter. The Typewriter will write dialogue, wrapping to the next line if the dialogue is too long.
 * Tweaked the Typewriter to fix the problem of printing incorrect characters when moving to a new dialogue.
+* Added a basic pause function. The player cannot move while the game is paused. So far, no other objects are affected by pause. The Typewritter uses pausing to prevent the player from moving while dialogue is present.
 
 ### Known Issues
 * ~~When writing to a new dialogue box (if the NPC's dialogue takes multiple windows, for example), the first letter of the dialogue will be incorrect. Cause is currently unknown.~~
