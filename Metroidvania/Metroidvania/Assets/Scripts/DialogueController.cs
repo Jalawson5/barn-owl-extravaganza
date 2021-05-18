@@ -14,7 +14,7 @@ public class DialogueController : MonoBehaviour
     {
         if(Input.GetKeyDown("up") && Vector2.Distance(transform.position, player.position) <= 1f)
         {
-            TypewriterController.instance.TypeDialogue(dialogue.texts);
+            TypewriterController.instance.TypeDialogue(dialogue.text);
         }
     }
 }

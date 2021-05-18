@@ -23,11 +23,13 @@ public class TypewriterController : MonoBehaviour
     private Vector2 startPosition;
     private float lineWidth; //Maximum x position for dialogue//
     private float lineDist; //How much space between each line of text?//
+    private float maxHeight; //Maximum number of lines//
+    private float numLine; //Number of the current line//
     private float xPointer; //Current x position of the pointer//
     private float yPointer; //Current y position of the pointer//
     private float spaceWidth; //Width of the gap between words//
     
-    private string[] dialogue; //List of dialogue to type//
+    private string dialogue; //List of dialogue to type//
     private string[] words; //List of words in current dialogue//
     private int wordIndex; //Index of the current word//
     private string current; //Current word to type//
@@ -68,6 +70,8 @@ public class TypewriterController : MonoBehaviour
         yPointer = startPosition.y;
         lineWidth = 4.5f;
         lineDist = 0.35f;
+        maxHeight = 7;
+        numLine = 1;
         spaceWidth = 0.2f;
         
         wordIndex = 0;
@@ -112,23 +116,16 @@ public class TypewriterController : MonoBehaviour
                     if((xPointer + WordWidth(current)) > lineWidth)
                     {
                         yPointer -= lineDist;
+                        numLine++;
                         xPointer = startPosition.x;
                     }
                 }
             
-                //If all words in the dialogue are written, wait for input for next dialogue//
-                if(wordIndex >= words.Length)
+                //If all words in the dialogue are written, or dialogue box is full, wait for input for next dialogue//
+                if(numLine > maxHeight || wordIndex >= words.Length)
                 {
                     isTyping = false;
-                
-                    dialogueIndex++;
-                    if(dialogueIndex < dialogue.Length)
-                    {
-                        words = dialogue[dialogueIndex].Split(' ');
-                        wordIndex = 0;
-                        current = words[0];
-                        currentIndex = 0;
-                    }
+                    currentIndex = 0;
                     
                     waitForInput = true;
                 }
@@ -149,8 +146,12 @@ public class TypewriterController : MonoBehaviour
             yPointer = startPosition.y;
             EraseText();
             
-            if(dialogueIndex < dialogue.Length)
+            if(wordIndex < words.Length)
+            {
+                current = words[wordIndex];
                 isTyping = true;
+                numLine = 0;
+            }
             
             else
                 MasterController.instance.isPaused = false;
@@ -162,17 +163,16 @@ public class TypewriterController : MonoBehaviour
         return isTyping;
     }
     
-    public void TypeDialogue(string[] dialogue)
+    public void TypeDialogue(string dialogue)
     {
         if(!isTyping && !waitForInput)
         {
             this.dialogue = dialogue;
             isTyping = true;
-            dialogueIndex = 0;
             wordIndex = 0;
             currentIndex = 0;
             
-            words = dialogue[dialogueIndex].Split(' ');
+            words = dialogue.Split(' ');
             current = words[0];
             
             MasterController.instance.isPaused = true;

@@ -7,5 +7,11 @@ using UnityEngine.UIElements;
 public class DialogueEntry : ScriptableObject
 {
     public int id;
-    public string[] texts;
+    public string text;
+    
+    public bool hasChoice;
+    public string choice1;
+    public string choice2;
+    public DialogueEntry result1;
+    public DialogueEntry result2;
 }
