@@ -194,13 +194,6 @@ public class TypewriterController : MonoBehaviour
                 choiceCursor = null;
             }
             
-            /*else if(currentEntry.hasChoice)
-            {
-                tempChoicebox = Instantiate(choiceboxPrefab);
-                TypeChoices();
-                CreateCursor();
-            }*/
-            
             else
             {
                 MasterController.instance.isPaused = false;
