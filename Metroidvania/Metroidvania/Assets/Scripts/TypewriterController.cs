@@ -116,8 +116,6 @@ public class TypewriterController : MonoBehaviour
             
             else
             {
-                Debug.Log(current);
-                Debug.Log(current[currentIndex]);
                 GameObject temp = Instantiate(letterPrefab, new Vector3(xPointer, yPointer, 0), Quaternion.identity);
                 Letter tempLetter = letters[current[currentIndex]];
                 temp.GetComponent<SpriteRenderer>().sprite = tempLetter.sprite;
