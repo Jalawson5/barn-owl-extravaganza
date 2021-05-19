@@ -10,6 +10,22 @@ public class TypewriterController : MonoBehaviour
     private GameObject letterPrefab;
     
     [SerializeField]
+    private GameObject textboxPrefab;
+    
+    [SerializeField]
+    private GameObject choiceboxPrefab;
+    
+    [SerializeField]
+    private GameObject choiceCursorPrefab;
+    
+    private GameObject choiceCursor;
+    
+    private GameObject tempTextbox;
+    private GameObject tempChoicebox;
+    
+    private DialogueEntry currentEntry;
+    
+    [SerializeField]
     private Sprite[] sprites;
 
     private static float baseDist;
@@ -20,7 +36,8 @@ public class TypewriterController : MonoBehaviour
     private List<GameObject> typedText;
     
     [SerializeField]
-    private Vector2 startPosition;
+    private Vector2 startPosition; //Starting position for dialogue box text//
+    private Vector2 choicePosition; //Starting position for choice box text//
     private float lineWidth; //Maximum x position for dialogue//
     private float lineDist; //How much space between each line of text?//
     private float maxHeight; //Maximum number of lines//
@@ -66,6 +83,8 @@ public class TypewriterController : MonoBehaviour
         typedText = new List<GameObject>();
         
         startPosition = new Vector2(-4.5f, -2f);
+        choicePosition = new Vector2(3.25f, -0.25f);
+        
         xPointer = startPosition.x;
         yPointer = startPosition.y;
         lineWidth = 4.5f;
@@ -128,6 +147,13 @@ public class TypewriterController : MonoBehaviour
                     currentIndex = 0;
                     
                     waitForInput = true;
+                    
+                    if(currentEntry.hasChoice && wordIndex >= words.Length)
+                    {
+                        tempChoicebox = Instantiate(choiceboxPrefab);
+                        TypeChoices();
+                        CreateCursor();
+                    }
                 }
             
                 else
@@ -153,8 +179,36 @@ public class TypewriterController : MonoBehaviour
                 numLine = 0;
             }
             
+            else if(choiceCursor != null)
+            {
+                if(choiceCursor.GetComponent<CursorController>().GetChoice() == 0)
+                {
+                    TypeDialogue(currentEntry.result1);
+                }
+                
+                else
+                {
+                    TypeDialogue(currentEntry.result2);
+                }
+                
+                Destroy(choiceCursor);
+                Destroy(tempChoicebox);
+                choiceCursor = null;
+            }
+            
+            /*else if(currentEntry.hasChoice)
+            {
+                tempChoicebox = Instantiate(choiceboxPrefab);
+                TypeChoices();
+                CreateCursor();
+            }*/
+            
             else
+            {
                 MasterController.instance.isPaused = false;
+                
+                Destroy(tempTextbox);
+            }
         }
     }
     
@@ -163,20 +217,76 @@ public class TypewriterController : MonoBehaviour
         return isTyping;
     }
     
-    public void TypeDialogue(string dialogue)
+    public void TypeDialogue(DialogueEntry dialogue)
     {
         if(!isTyping && !waitForInput)
         {
-            this.dialogue = dialogue;
+            this.dialogue = dialogue.text;
             isTyping = true;
             wordIndex = 0;
             currentIndex = 0;
             
-            words = dialogue.Split(' ');
+            words = this.dialogue.Split(' ');
             current = words[0];
             
             MasterController.instance.isPaused = true;
+            
+            if(tempTextbox == null)
+                tempTextbox = Instantiate(textboxPrefab);
+            
+            currentEntry = dialogue;
+            Debug.Log(currentEntry.text);
         }
+    }
+    
+    private void TypeChoices()
+    {
+        xPointer = choicePosition.x;
+        yPointer = choicePosition.y;
+        
+        for(int i = 0; i < currentEntry.choice1.Length; i++)
+        {
+            if(currentEntry.choice1[i] == ' ')
+            {
+                xPointer += spaceWidth;
+                continue;
+            }
+            
+            GameObject temp = Instantiate(letterPrefab, new Vector3(xPointer, yPointer, 0), Quaternion.identity);
+            Letter tempLetter = letters[currentEntry.choice1[i]];
+            temp.GetComponent<SpriteRenderer>().sprite = tempLetter.sprite;
+            typedText.Add(temp);
+            
+            xPointer += tempLetter.DistToNext();
+        }
+        
+        xPointer = choicePosition.x;
+        yPointer -= lineDist;
+        
+        for(int i = 0; i < currentEntry.choice2.Length; i++)
+        {
+            if(currentEntry.choice2[i] == ' ')
+            {
+                xPointer += spaceWidth;
+                continue;
+            }
+            
+            GameObject temp = Instantiate(letterPrefab, new Vector3(xPointer, yPointer, 0), Quaternion.identity);
+            Letter tempLetter = letters[currentEntry.choice2[i]];
+            temp.GetComponent<SpriteRenderer>().sprite = tempLetter.sprite;
+            typedText.Add(temp);
+            
+            xPointer += tempLetter.DistToNext();
+        }
+        
+        xPointer = startPosition.x;
+        yPointer = startPosition.y;
+    }
+    
+    private void CreateCursor()
+    {
+        choiceCursor = Instantiate(choiceCursorPrefab);
+        choiceCursor.GetComponent<CursorController>().InitValues(2, lineDist, choicePosition - new Vector2(0.25f, 0));
     }
     
     private class Letter

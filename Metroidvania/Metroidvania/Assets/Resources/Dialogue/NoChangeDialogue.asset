@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d76f10d5236cfd48b944665723b5f21, type: 3}
+  m_Name: NoChangeDialogue
+  m_EditorClassIdentifier: 
+  id: 2
+  text: Why u no change
+  hasChoice: 1
+  choice1: Because
+  choice2: No
+  result1: {fileID: 11400000, guid: f8fa0233379ccdc48901e5adf4f0290f, type: 2}
+  result2: {fileID: 11400000, guid: 444c5b7f040cd2841af6a2903e559dd6, type: 2}

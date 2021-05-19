@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: TestDialogue
   m_EditorClassIdentifier: 
   id: 0
-  texts:
-  - Hello! I am a test dialogue!
-  - This dialogue should wrap to the next line. Unless it doesn't, which is bad.
-    Don't do that.
-  - During this fight, I've seen a lot of changing, in the way you feel about me,
-    and in the way I feel about you. In here, there were two guys killing each other,
-    but I guess that's better than twenty million. I guess what I'm trying to say,
-    is that if I can change, and you can change, everybody can change!
+  text: During this fight, I've seen a lot of changing, in the way you feel about
+    me, and in the way I feel about you. In here, there were two guys killing each
+    other, but I guess that's better than twenty million. I guess what I'm trying
+    to say, is that if I can change, and you can change, everybody can change!
+  hasChoice: 1
+  choice1: Change
+  choice2: Don't Change
+  result1: {fileID: 11400000, guid: 04b2d268b66d6524eb29955999cc3bc5, type: 2}
+  result2: {fileID: 11400000, guid: 7141646b3c5e5ee46b2a4c54ea8b4d16, type: 2}
