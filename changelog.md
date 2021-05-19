@@ -1,5 +1,17 @@
 # Changelog
 
+## May 19, 2021
+
+### Changes
+* Changed the dialogue system to allow for different dialogue choices. Dialogue will change depending on the player's choice.
+* Changed dialogue boxes to only appear during dialogue. The new dialogue box for different dialogue choices works the same way.
+
+### Known Issues
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 18, 2021
 
 ### Changes
