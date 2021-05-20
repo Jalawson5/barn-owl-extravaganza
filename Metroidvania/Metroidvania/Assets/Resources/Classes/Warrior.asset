@@ -16,17 +16,11 @@ MonoBehaviour:
   name: Warrior
   baseHP: 80
   baseMP: 30
-  baseSTR: 10
-  baseINT: 4
-  baseEND: 8
-  baseSPR: 4
-  baseAGI: 5
-  baseLUCK: 5
-  growthHP: 0
-  growthMP: 0
-  growthSTR: 0
-  growthINT: 0
-  growthEND: 0
-  growthSPR: 0
-  growthAGI: 0
-  growthLUCK: 0
+  growthHP: 20
+  growthMP: 7
+  growthSTR: 5
+  growthINT: 1
+  growthEND: 4
+  growthSPR: 1
+  growthAGI: 2
+  growthLUCK: 2

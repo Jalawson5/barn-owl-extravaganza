@@ -9,18 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2b202d360cc914b9ce023898dd7186, type: 3}
-  m_Name: Wizard
+  m_Script: {fileID: 11500000, guid: 2a5ab4ffea58e1b4295acfbd09c37dfc, type: 3}
+  m_Name: Unnamed3
   m_EditorClassIdentifier: 
-  id: 1
-  name: Wizard
-  baseHP: 40
-  baseMP: 80
-  growthHP: 5
-  growthMP: 15
-  growthSTR: 1
-  growthINT: 6
-  growthEND: 1
-  growthSPR: 3
-  growthAGI: 3
-  growthLUCK: 2
+  id: 6
+  name: Unnamed3
+  baseSTR: 12
+  baseINT: 10
+  baseEND: 10
+  baseSPR: 10
+  baseAGI: 10
+  baseLUCK: 12

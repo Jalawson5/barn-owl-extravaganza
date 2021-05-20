@@ -16,17 +16,11 @@ MonoBehaviour:
   name: Thief
   baseHP: 60
   baseMP: 60
-  baseSTR: 7
-  baseINT: 5
-  baseEND: 5
-  baseSPR: 4
-  baseAGI: 10
-  baseLUCK: 10
-  growthHP: 0
-  growthMP: 0
-  growthSTR: 0
-  growthINT: 0
-  growthEND: 0
-  growthSPR: 0
-  growthAGI: 0
-  growthLUCK: 0
+  growthHP: 10
+  growthMP: 10
+  growthSTR: 3
+  growthINT: 1
+  growthEND: 2
+  growthSPR: 1
+  growthAGI: 5
+  growthLUCK: 5

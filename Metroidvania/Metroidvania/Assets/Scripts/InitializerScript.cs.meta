@@ -3,7 +3,22 @@ guid: 42a06fa8b626df947968ac42530b085e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - onehand: {fileID: 11400000, guid: 9e1494a7028a0d645827dbfac6628c2c, type: 2}
+  - twohand: {fileID: 11400000, guid: ccd8ed5cb30196a4f9ead3445744018a, type: 2}
+  - spear: {fileID: 11400000, guid: 3c9b402166e53984595f235cc1401089, type: 2}
+  - staff: {fileID: 11400000, guid: 40bd5811e51b35249a2e41ba5e140c66, type: 2}
+  - tome: {fileID: 11400000, guid: 780e4fe54827e974da0717ec0b51f0b0, type: 2}
+  - warrior: {fileID: 11400000, guid: 39ee1a3d454ecdc4191592b6ef370925, type: 2}
+  - wizard: {fileID: 11400000, guid: 33e8fbd35222c0f49a01d061af390ccb, type: 2}
+  - thief: {fileID: 11400000, guid: 668620096c39a5a448d927a6ea11efc9, type: 2}
+  - human: {fileID: 11400000, guid: 39b492c25bdd4ea44905ba8eaecbbda4, type: 2}
+  - elf: {fileID: 11400000, guid: 10790f6e4eb93164f835c75683ba2fa7, type: 2}
+  - dwarf: {fileID: 11400000, guid: d741ec520dabaa646a0ea3b6fb8235f9, type: 2}
+  - gnome: {fileID: 11400000, guid: 492e8da02cce1984383826d3f0498134, type: 2}
+  - unnamed1: {fileID: 11400000, guid: d4a52bdb34d0d154985a5355b87571dd, type: 2}
+  - unnamed2: {fileID: 11400000, guid: 8d30d919ecd616647acbcdea8048335a, type: 2}
+  - unnamed3: {fileID: 11400000, guid: 5819d50d0614e8140bed718ccb0321e1, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

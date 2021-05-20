@@ -23,6 +23,16 @@ public class CharacterData
     public static PlayerClass wizard;
     public static PlayerClass thief;
     
+    //Races//
+    public const int NumRaces = 7;
+    
+    public static PlayerRace human;
+    public static PlayerRace elf;
+    public static PlayerRace dwarf;
+    public static PlayerRace gnome;
+    public static PlayerRace unnamed1;
+    public static PlayerRace unnamed2;
+    public static PlayerRace unnamed3;
     
     //Stat Conversion Rates//
     public static float ENDtoHP = 1.5f;
@@ -34,6 +44,7 @@ public class CharacterData
     
     public class CharacterEntry
     {
+        PlayerRace playerRace;
         PlayerClass playerClass;
         string name;
         
@@ -85,10 +96,11 @@ public class CharacterData
         
         //This constructor is to be used to initialize a character from a loaded game//
         //I know it's a bit messy, but there's a lot of data to initialize!//
-        public CharacterEntry(PlayerClass playerClass, string name, int level, int exp, int playerHP, int playerMP, int playerSTR, int playerINT, int playerEND, int playerSPR, int playerAGI, int playerLUCK,
-                              int weapon, int armor, int accessory1, int accessory2, int rune1, int rune2, int[] skills, int skill1, int skill2, bool doubleJumpUnlocked, bool wallJumpUnlocked,
+        public CharacterEntry(PlayerRace playerRace, PlayerClass playerClass, string name, int level, int exp, int playerHP, int playerMP, int playerSTR, int playerINT, int playerEND, int playerSPR, int playerAGI, 
+                              int playerLUCK, int weapon, int armor, int accessory1, int accessory2, int rune1, int rune2, int[] skills, int skill1, int skill2, bool doubleJumpUnlocked, bool wallJumpUnlocked,
                               bool rockBreakerUnlocked, bool slideUnlocked, bool swimUnlocked, bool keyUnlocked)
         {
+            this.playerRace = playerRace;
             this.playerClass = playerClass;
             this.name = name;
             this.level = level;
@@ -128,20 +140,21 @@ public class CharacterData
         }
         
         //This constructor is used to create a new character//
-        public CharacterEntry(PlayerClass playerClass, string name)
+        public CharacterEntry(PlayerRace playerRace, PlayerClass playerClass, string name)
         {
+            this.playerRace = playerRace;
             this.playerClass = playerClass;
             this.name = name;
             this.level = 1;
             this.exp = 0;
             this.playerHP = playerClass.baseHP;
             this.playerMP = playerClass.baseMP;
-            this.playerSTR = playerClass.baseSTR;
-            this.playerINT = playerClass.baseINT;
-            this.playerEND = playerClass.baseEND;
-            this.playerSPR = playerClass.baseSPR;
-            this.playerAGI = playerClass.baseAGI;
-            this.playerLUCK = playerClass.baseLUCK;
+            this.playerSTR = playerRace.baseSTR;
+            this.playerINT = playerRace.baseINT;
+            this.playerEND = playerRace.baseEND;
+            this.playerSPR = playerRace.baseSPR;
+            this.playerAGI = playerRace.baseAGI;
+            this.playerLUCK = playerRace.baseLUCK;
             
             this.skillSTR = 0;
             this.skillINT = 0;

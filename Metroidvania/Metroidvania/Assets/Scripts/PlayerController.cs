@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         
         terrainLayer = LayerMask.GetMask("Solid");
         
-        stats = new CharacterData.CharacterEntry(CharacterData.warrior, "Dummy");
+        stats = new CharacterData.CharacterEntry(CharacterData.human, CharacterData.warrior, "Dummy");
         
         //skill1 = (ActionSkill)(stats.GetSkill1().GetSkill());
         skill2 = (ActionSkill)(stats.GetSkill2().GetSkill());
