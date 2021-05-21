@@ -1,8 +1,20 @@
 # Changelog
 
+## May 21, 2021
+
+### Changes
+* Added some UI sprites.
+* Created the UI for the character creator.
+
+### Known Issues
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 20, 2021
 
-## Changes
+### Changes
 * Added character races (human, elf, dwarf, gnome, and three unnamed) to prepare for character creation. Races affect the player's base stats as well as what progression ability the character starts with.
 * Tweaked classes to move some functionality (base stats) to character races instead.
 * Added scenes to prepare for character creation.
