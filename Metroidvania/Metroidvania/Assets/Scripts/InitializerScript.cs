@@ -50,6 +50,7 @@ public class InitializerScript : MonoBehaviour
         InitClassData();
         InitItems();
         InitSkills();
+        InitRaceData();
     }
     
     void Start()
