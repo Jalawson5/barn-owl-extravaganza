@@ -1,5 +1,17 @@
 # Changelog
 
+## May 24, 2021
+
+## Changes
+* Implemented most of the character creator. The creator now calculates and displays the character's base stats based on the chosen race and class.
+
+### Known Issues
+* The character creator affects nothing cosmetically, due to the current lack of art.
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## May 21, 2021
 
 ### Changes
