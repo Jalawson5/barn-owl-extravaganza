@@ -12,6 +12,7 @@ Development is temporarily paused while I make some design choices. Though some 
 * Player Controls: Movement, jumping, attacking in different directions, different aerial attacks, and so on.
 * Major Progression Upgrades: Double jumping, wall jumping, sliding, swimming, and breaking specific blocks are now implemented. This includes most of the progression abilities I have planned so far.
 * Basic Stat Calculations: Damage dealt and received is determined by the attacker's offensive stats and the defender's defensive stats. Accuracy is also calculated, allowing attacks to miss against particularly agile enemies.
+* Dialogue: I can now type stuff to the screen! Not that there's much dialogue, or any NPCs to speak it, but it's functional nonetheless.
 
 * Basic Enemy Behaviors: I have separated movement and attack behaviors, allowing me to mix and match behaviors to easily create new enemy types. Of course, some enemies, like bosses, will have to be more complex and will require custom behavior scripts. More behaviors will be implemented, but the current behaviors are plenty for me to test some different enemies.
 
