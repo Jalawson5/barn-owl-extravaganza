@@ -70,6 +70,8 @@ public class CreatorController : MonoBehaviour
     private int max;
     private int direction;
     
+    private bool isPaused;
+    
     // Start is called before the first frame update
     void Start()
     {    
@@ -94,104 +96,114 @@ public class CreatorController : MonoBehaviour
         direction = 0;
         
         UpdateStats();
+        
+        isPaused = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("up"))
+        if(!isPaused)
         {
-            index--;
-            if(index < 0)
+            if(Input.GetKeyDown("up"))
+            {
+                index--;
+                if(index < 0)
                 index = max;
-        }
+            }
         
-        else if(Input.GetKeyDown("down"))
-        {
-            index++;
-            if(index > max)
-                index = 0;
-        }
+            else if(Input.GetKeyDown("down"))
+            {
+                index++;
+                if(index > max)
+                    index = 0;
+            }
         
-        cursor.transform.localPosition = new Vector3(cursor.transform.localPosition.x, cursorStartY - (50f * index), 0);
+            cursor.transform.localPosition = new Vector3(cursor.transform.localPosition.x, cursorStartY - (50f * index), 0);
         
-        if(index < 5)
-        {
-            if(Input.GetKeyDown("left"))
+            if(index < 5)
             {
-                direction = -1;
-            }
+                if(Input.GetKeyDown("left"))
+                {
+                    direction = -1;
+                }
             
-            else if(Input.GetKeyDown("right"))
-            {
-                direction = 1;
-            }
+                else if(Input.GetKeyDown("right"))
+                {
+                    direction = 1;
+                }
             
-            if(index == 0)
-            {
-                raceIndex += direction;
+                if(index == 0)
+                {
+                    raceIndex += direction;
                 
-                if(raceIndex < 0)
-                    raceIndex = raceTexts.Length - 1;
+                    if(raceIndex < 0)
+                        raceIndex = raceTexts.Length - 1;
                 
-                else if(raceIndex == raceTexts.Length)
-                    raceIndex = 0;
+                    else if(raceIndex == raceTexts.Length)
+                        raceIndex = 0;
                     
-                raceText.text = raceTexts[raceIndex];
-                UpdateStats();
-            }
+                    raceText.text = raceTexts[raceIndex];
+                    UpdateStats();
+                }
             
-            else if(index == 1)
-            {
-                genderIndex += direction;
+                else if(index == 1)
+                {
+                    genderIndex += direction;
                 
-                if(genderIndex < 0)
-                    genderIndex = 1;
+                    if(genderIndex < 0)
+                        genderIndex = 1;
                 
-                else if(genderIndex > 1)
-                    genderIndex = 0;
+                    else if(genderIndex > 1)
+                        genderIndex = 0;
                     
-                genderText.text = genderTexts[genderIndex];
-            }
+                    genderText.text = genderTexts[genderIndex];
+                }
             
-            else if(index == 2)
-            {
-                classIndex += direction;
+                else if(index == 2)
+                {
+                    classIndex += direction;
                 
-                if(classIndex < 0)
-                    classIndex = classTexts.Length - 1;
+                    if(classIndex < 0)
+                        classIndex = classTexts.Length - 1;
                 
-                else if(classIndex == classTexts.Length)
-                    classIndex = 0;
+                    else if(classIndex == classTexts.Length)
+                        classIndex = 0;
                     
-                classText.text = classTexts[classIndex];
-                UpdateStats();
-            }
+                    classText.text = classTexts[classIndex];
+                    UpdateStats();
+                }
             
-            else if(index == 3)
-            {
-                skinIndex += direction;
+                else if(index == 3)
+                {
+                    skinIndex += direction;
                 
-                if(skinIndex < 0)
-                    skinIndex = skinMax - 1;
+                    if(skinIndex < 0)
+                        skinIndex = skinMax - 1;
                 
-                else if(skinIndex == skinMax)
-                    skinIndex = 0;
+                    else if(skinIndex == skinMax)
+                        skinIndex = 0;
                 
-                skinText.text = (skinIndex + 1).ToString();
-            }
+                    skinText.text = (skinIndex + 1).ToString();
+                }
             
-            else if(index == 4)
-            {
-                hairIndex += direction;
+                else if(index == 4)
+                {
+                    hairIndex += direction;
                 
-                if(hairIndex < 0)
-                    hairIndex = hairMax - 1;
+                    if(hairIndex < 0)
+                        hairIndex = hairMax - 1;
                 
-                else if(hairIndex == hairMax)
-                    hairIndex = 0;
+                    else if(hairIndex == hairMax)
+                        hairIndex = 0;
                     
-                hairText.text = (hairIndex + 1).ToString();
+                    hairText.text = (hairIndex + 1).ToString();
+                }
+            }
+            
+            else if(index == 5 && Input.GetKeyDown(MasterController.instance.controls.GetSelectKey()))
+            {
+                
             }
         }
         
