@@ -15,6 +15,8 @@ public class NameCursorController : MonoBehaviour
     private int cursorX;
     private int cursorY;
     
+    private int maxNameSize;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,8 @@ public class NameCursorController : MonoBehaviour
         
         cursorX = 0;
         cursorY = 0;
+        
+        maxNameSize = 12;
     }
 
     // Update is called once per frame

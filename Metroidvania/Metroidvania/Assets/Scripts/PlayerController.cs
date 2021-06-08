@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         
         terrainLayer = LayerMask.GetMask("Solid");
         
-        stats = new CharacterData.CharacterEntry(CharacterData.human, CharacterData.warrior, "Dummy");
+        stats = new CharacterData.CharacterEntry(CharacterData.human, CharacterData.warrior, false, "Dummy");
         
         //skill1 = (ActionSkill)(stats.GetSkill1().GetSkill());
         skill2 = (ActionSkill)(stats.GetSkill2().GetSkill());
@@ -169,6 +169,8 @@ public class PlayerController : MonoBehaviour
         width = col.bounds.size.x / 2;
         
         gravity = 10f;
+        
+        CharacterData.currentChar = stats;
     }
 
     // Update is called once per frame

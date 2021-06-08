@@ -19,6 +19,8 @@ public class CharacterData
     //Classes//
     public const int NumClasses = 3;
     
+    public static CharacterEntry currentChar;
+    
     public static PlayerClass warrior;
     public static PlayerClass wizard;
     public static PlayerClass thief;
@@ -46,6 +48,7 @@ public class CharacterData
     {
         PlayerRace playerRace;
         PlayerClass playerClass;
+        bool playerGender; //false = male, true = female. Using a bool just makes it cleaner.//
         string name;
         
         int level;
@@ -96,12 +99,13 @@ public class CharacterData
         
         //This constructor is to be used to initialize a character from a loaded game//
         //I know it's a bit messy, but there's a lot of data to initialize!//
-        public CharacterEntry(PlayerRace playerRace, PlayerClass playerClass, string name, int level, int exp, int playerHP, int playerMP, int playerSTR, int playerINT, int playerEND, int playerSPR, int playerAGI, 
+        public CharacterEntry(PlayerRace playerRace, PlayerClass playerClass, bool playerGender, string name, int level, int exp, int playerHP, int playerMP, int playerSTR, int playerINT, int playerEND, int playerSPR, int playerAGI, 
                               int playerLUCK, int weapon, int armor, int accessory1, int accessory2, int rune1, int rune2, int[] skills, int skill1, int skill2, bool doubleJumpUnlocked, bool wallJumpUnlocked,
                               bool rockBreakerUnlocked, bool slideUnlocked, bool swimUnlocked, bool keyUnlocked)
         {
             this.playerRace = playerRace;
             this.playerClass = playerClass;
+            this.playerGender = playerGender;
             this.name = name;
             this.level = level;
             this.exp = exp;
@@ -140,10 +144,11 @@ public class CharacterData
         }
         
         //This constructor is used to create a new character//
-        public CharacterEntry(PlayerRace playerRace, PlayerClass playerClass, string name)
+        public CharacterEntry(PlayerRace playerRace, PlayerClass playerClass, bool playerGender, string name)
         {
             this.playerRace = playerRace;
             this.playerClass = playerClass;
+            this.playerGender = playerGender;
             this.name = name;
             this.level = 1;
             this.exp = 0;
@@ -178,6 +183,27 @@ public class CharacterData
             this.slideUnlocked = false;
             this.swimUnlocked = false;
             this.keyUnlocked = false;
+        }
+        
+        //Character Info//
+        public PlayerRace GetRace()
+        {
+            return this.playerRace;
+        }
+        
+        public PlayerClass GetClass()
+        {
+            return this.playerClass;
+        }
+        
+        public bool GetGender()
+        {
+            return this.playerGender;
+        }
+        
+        public string GetName()
+        {
+            return this.name;
         }
         
         //Get Stats//
