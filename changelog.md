@@ -1,5 +1,20 @@
 # Changelog
 
+## June 8, 2021
+Note: Been a while, huh? Progress has been a bit slow as of late, unfortunately.
+
+### Changes
+* Created the keyboard for inputting a name in the character creator. This was actually completed last week, but I can't remember if I pushed that code or not.
+* Created a dictionary that holds any variables that need to be used in text. So far, this includes the player's name, race, class, and any appropriate pronouns. Later, this may include race or class specific dialogue for NPCs, but we'll see.
+
+### Known Issues
+* The character creator affects nothing cosmetically, due to the current lack of art.
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+* The keyboard for naming your character does nothing at the moment. The cursor properly moves around the keyboard, however.
+
 ## June 2, 2021
 Note: I'm back home, so code updates should come a little more often now.
 
