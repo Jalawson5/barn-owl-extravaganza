@@ -4,9 +4,10 @@
 
 ### Changes
 * Tweaked the position of the keyboard cursor to be a little more centered around each letter.
+* Added a missing object to the Character Creator, which was causing some problems in the background.
 
 ### Known Issues
-* While the name entry window is open, input is still controlling the cursor in the previous menu, which causes some issues in the background.
+* While the name entry window is open, input is still controlling the cursor in the previous menu.~~, which causes some issues in the background.~~
 * The character creator affects nothing cosmetically, due to the current lack of art.
 * Wall jump speed needs some tweaking.
 * The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
