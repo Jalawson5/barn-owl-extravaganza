@@ -8,6 +8,12 @@ public class CreatorController : MonoBehaviour
     [SerializeField]
     private GameObject cursor;
     
+    [SerializeField]
+    private GameObject nameWindow;
+    
+    [SerializeField]
+    private GameObject canvas;
+    
     private float cursorStartY;
     
     [SerializeField]
@@ -203,7 +209,8 @@ public class CreatorController : MonoBehaviour
             
             else if(index == 5 && Input.GetKeyDown(MasterController.instance.controls.GetSelectKey()))
             {
-                
+                isPaused = true;
+                Instantiate(nameWindow, canvas.transform);
             }
         }
         
