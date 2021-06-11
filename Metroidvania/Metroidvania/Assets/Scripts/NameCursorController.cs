@@ -9,6 +9,9 @@ public class NameCursorController : MonoBehaviour
     
     private Transform[,] positions;
     
+    private float xOffset; //x position offset//
+    private float yOffset; //y position offset//
+    
     private int keyboardWidth;
     private int keyboardHeight;
     
@@ -22,6 +25,9 @@ public class NameCursorController : MonoBehaviour
     {
         keyboardWidth = 7;
         keyboardHeight = 7;
+        
+        xOffset = -4;
+        yOffset = -4;
     
         BuildPositions();
         
@@ -70,8 +76,7 @@ public class NameCursorController : MonoBehaviour
             }
         }
         
-        transform.position = positions[cursorX, cursorY].position;
-        Debug.Log("coord: " + cursorX + ", " + cursorY);
+        transform.position = positions[cursorX, cursorY].position + new Vector3(xOffset, yOffset, 0);
     }
     
     private void BuildPositions()
