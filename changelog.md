@@ -1,5 +1,19 @@
 # Changelog
 
+## June 11, 2021
+
+### Changes
+* Tweaked the position of the keyboard cursor to be a little more centered around each letter.
+
+### Known Issues
+* While the name entry window is open, input is still controlling the cursor in the previous menu, which causes some issues in the background.
+* The character creator affects nothing cosmetically, due to the current lack of art.
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+* The keyboard for naming your character does nothing at the moment. The cursor properly moves around the keyboard, however.
+
 ## June 8, 2021
 Note: Been a while, huh? Progress has been a bit slow as of late, unfortunately.
 
