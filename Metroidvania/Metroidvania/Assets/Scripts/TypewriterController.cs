@@ -280,7 +280,7 @@ public class TypewriterController : MonoBehaviour
         choiceCursor.GetComponent<CursorController>().InitValues(2, lineDist, choicePosition - new Vector2(0.25f, 0));
     }
     
-    private class Letter
+    public class Letter
     {
         public Sprite sprite; //Sprite for this character//
         public int width; //Width of the sprite in pixels//
@@ -426,5 +426,10 @@ public class TypewriterController : MonoBehaviour
         letters.Add(';', new Letter(sprites[i++], 1));
         letters.Add('\'', new Letter(sprites[i++], 1));
         letters.Add('"', new Letter(sprites[i++], 3));
+    }
+    
+    public Letter GetLetter(char letter)
+    {
+        return letters[letter];
     }
 }

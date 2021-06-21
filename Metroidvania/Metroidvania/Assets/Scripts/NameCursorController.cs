@@ -1,9 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NameCursorController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject letterPrefab;
+
+    [SerializeField]
+    private Transform nameTextStart;
+    
+    private float typewriterX; //x position of the typewriter//
+    
+    private GameObject[] currentLetters; //Currently typed letters//
+    private string currentName;
+    
+    private int letterIndex;
+
     [SerializeField]
     private Transform[] flatPositions;
     
@@ -34,7 +48,12 @@ public class NameCursorController : MonoBehaviour
         cursorX = 0;
         cursorY = 0;
         
-        maxNameSize = 12;
+        maxNameSize = 11;
+        
+        typewriterX = nameTextStart.position.x;
+        currentLetters = new GameObject[maxNameSize];
+        currentName = "";
+        letterIndex = 0;
     }
 
     // Update is called once per frame
@@ -77,6 +96,30 @@ public class NameCursorController : MonoBehaviour
         }
         
         transform.position = positions[cursorX, cursorY].position + new Vector3(xOffset, yOffset, 0);
+        
+        if(Input.GetKeyDown(MasterController.instance.controls.GetSelectKey()))
+        {
+            if(cursorX == keyboardWidth && cursorY == keyboardHeight)
+            {
+                //Return to creator menu with input name//
+            }
+            
+            else if(cursorX == keyboardWidth - 1 && cursorY == keyboardHeight)
+            {
+                if(letterIndex > 0)
+                {
+                    BackLetter();
+                }
+            }
+            
+            else
+            {
+                if(letterIndex != maxNameSize)
+                {
+                    TypeLetter(positions[cursorX, cursorY].gameObject.name);
+                }
+            }
+        }
     }
     
     private void BuildPositions()
@@ -92,5 +135,25 @@ public class NameCursorController : MonoBehaviour
                 Debug.Log(positions[k, i].name);
             }
         }
+    }
+    
+    private void TypeLetter(string letter)
+    {
+        char ind = letter[0];
+        
+        currentLetters[letterIndex] = Instantiate(letterPrefab, new Vector3(typewriterX, nameTextStart.position.y, 0), Quaternion.identity, transform.parent);
+        TypewriterController.Letter temp = TypewriterController.instance.GetLetter(ind);
+        currentLetters[letterIndex].GetComponent<Image>().sprite = temp.sprite;
+        currentLetters[letterIndex].GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        typewriterX += temp.DistToNext() * 50;
+        
+        currentName += ind;
+        letterIndex++;
+    }
+    
+    private void BackLetter()
+    {
+        typewriterX = currentLetters[--letterIndex].transform.position.x;
+        Destroy(currentLetters[letterIndex]);
     }
 }
