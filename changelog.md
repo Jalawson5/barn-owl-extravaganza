@@ -5,6 +5,7 @@
 ### Changes
 * The name input keyboard now shows the name as you type it, up to a maximum of 12 characters.
 * The name input keyboard now has a working backspace button. Currently, the apostrophe character deletes the last typed letter, I will add a proper "backspace" icon later.
+* The name you enter in the name input window is now transferred to the character creator window when the naming window is closed.
 
 ### Known Issues
 * The character creator affects nothing cosmetically, due to the current lack of art.
@@ -12,6 +13,7 @@
 * The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
 * Still working on player movement.
 * Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+* The character creator window only remembers the last name you entered, and the name you entered does not save if you open the naming window again.
 
 ## June 11, 2021
 
