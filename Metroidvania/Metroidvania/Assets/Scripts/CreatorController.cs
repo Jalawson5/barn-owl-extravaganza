@@ -81,6 +81,7 @@ public class CreatorController : MonoBehaviour
     private bool isPaused;
     
     private GameObject window;
+    private NameCursorController namingScript;
     
     void Awake()
     {
@@ -299,5 +300,10 @@ public class CreatorController : MonoBehaviour
         isPaused = false;
         nameText.GetComponent<Text>().text = name;
         Destroy(window);
+    }
+    
+    public string GetName()
+    {
+        return nameText.GetComponent<Text>().text;
     }
 }

@@ -34,7 +34,6 @@ public class NameCursorController : MonoBehaviour
     
     private int maxNameSize;
     
-    // Start is called before the first frame update
     void Start()
     {
         keyboardWidth = 7;
@@ -54,6 +53,8 @@ public class NameCursorController : MonoBehaviour
         currentLetters = new GameObject[maxNameSize];
         currentName = "";
         letterIndex = 0;
+        
+        InitName(CreatorController.instance.GetName());
     }
 
     // Update is called once per frame
@@ -135,6 +136,19 @@ public class NameCursorController : MonoBehaviour
                 Debug.Log(positions[k, i].name);
             }
         }
+    }
+    
+    public void InitName(string name)
+    {
+        if(name.Length == 0)
+            return;
+            
+        for(int i = 0; i < name.Length; i++)
+        {
+            TypeLetter(name[i].ToString());
+        }
+        
+        currentName = name;
     }
     
     private void TypeLetter(string letter)
