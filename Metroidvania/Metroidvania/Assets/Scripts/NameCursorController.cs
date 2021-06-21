@@ -101,7 +101,7 @@ public class NameCursorController : MonoBehaviour
         {
             if(cursorX == keyboardWidth && cursorY == keyboardHeight)
             {
-                //Return to creator menu with input name//
+                CreatorController.instance.FinishName(currentName);
             }
             
             else if(cursorX == keyboardWidth - 1 && cursorY == keyboardHeight)
@@ -155,5 +155,6 @@ public class NameCursorController : MonoBehaviour
     {
         typewriterX = currentLetters[--letterIndex].transform.position.x;
         Destroy(currentLetters[letterIndex]);
+        currentName = currentName.Remove(currentName.Length - 1);
     }
 }

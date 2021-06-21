@@ -3145,6 +3145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791e11d4d560830468e0f6e5522bcbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  letterPrefab: {fileID: 6971457411410479708, guid: 5dd86fa1a495da94f8ef3e2697be033e,
+    type: 3}
   nameTextStart: {fileID: 912601052}
   flatPositions:
   - {fileID: 4619061276772329600}

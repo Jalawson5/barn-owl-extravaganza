@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CreatorController : MonoBehaviour
 {
+    public static CreatorController instance;
+
     [SerializeField]
     private GameObject cursor;
     
@@ -77,6 +79,22 @@ public class CreatorController : MonoBehaviour
     private int direction;
     
     private bool isPaused;
+    
+    private GameObject window;
+    
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        
+        else if(instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -210,7 +228,7 @@ public class CreatorController : MonoBehaviour
             else if(index == 5 && Input.GetKeyDown(MasterController.instance.controls.GetSelectKey()))
             {
                 isPaused = true;
-                Instantiate(nameWindow, canvas.transform);
+                window = Instantiate(nameWindow, canvas.transform);
             }
         }
         
@@ -274,5 +292,12 @@ public class CreatorController : MonoBehaviour
         sprText.text = (tempRace.baseSPR + tempClass.growthSPR).ToString();
         agiText.text = (tempRace.baseAGI + tempClass.growthAGI).ToString();
         luckText.text = (tempRace.baseLUCK + tempClass.growthLUCK).ToString();
+    }
+    
+    public void FinishName(string name)
+    {
+        isPaused = false;
+        nameText.GetComponent<Text>().text = name;
+        Destroy(window);
     }
 }
