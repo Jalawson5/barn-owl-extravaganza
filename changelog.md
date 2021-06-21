@@ -1,5 +1,18 @@
 # Changelog
 
+## June 21, 2021
+
+### Changes
+* The name input keyboard now shows the name as you type it, up to a maximum of 12 characters.
+* The name input keyboard now has a working backspace button. Currently, the apostrophe character deletes the last typed letter, I will add a proper "backspace" icon later.
+
+### Known Issues
+* The character creator affects nothing cosmetically, due to the current lack of art.
+* Wall jump speed needs some tweaking.
+* The player can use their downward attack while sliding. This isn't intended, but may be reworked into a different kind of attack in the future.
+* Still working on player movement.
+* Enemies with the AirChaseMovement move type will not chase players if they are on the other side of a wall, rather than on top of the wall.
+
 ## June 11, 2021
 
 ### Changes
